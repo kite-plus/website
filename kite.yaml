@@ -1,0 +1,20 @@
+site:
+  title: Kite
+  description: Open-source publishing in a single binary
+  baseURL: https://www.kite.plus
+  language: en
+
+content:
+  store: file
+  dir: content
+
+theme:
+  settings:
+    # The logo's blue, darkened until links clear 4.5:1 on white.
+    accent: "#3d65bd"
+    nav: |-
+      Docs | /docs/
+      GitHub | https://github.com/kite-plus/kite
+
+build:
+  output: public

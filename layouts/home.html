@@ -1,0 +1,91 @@
+{{- /* The theme's home page with the product in front of the news. Only the
+       first page of the news carries the introduction. */ -}}
+{{ define "head" }}
+<style>
+  .intro { margin-top: 44px; }
+  .intro h1 { margin: 0; font-size: 27px; font-weight: 700; line-height: 1.55; letter-spacing: .01em; }
+  .intro .lede { margin: 18px 0 0; font-size: 15.5px; color: var(--muted); }
+  .actions { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 22px; margin: 26px 0 0; font-size: 14px; }
+  .actions a { text-decoration: none; }
+  .actions .button { padding: 7px 18px; border-radius: 3px; background: var(--accent); color: var(--bg); }
+  .actions .button:hover { opacity: .88; }
+
+  .features {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 34px;
+    margin: 44px 0 0; padding: 28px 0 0; border-top: 1px solid var(--line); list-style: none;
+  }
+  .features h2 { margin: 0; font-size: 15.5px; font-weight: 700; line-height: 1.7; }
+  .features p { margin: 6px 0 0; font-size: 13.5px; line-height: 1.85; color: var(--muted); }
+  .features code, .start code { font-family: var(--mono); font-size: .88em; }
+
+  .start { margin: 44px 0 0; padding: 26px 0 0; border-top: 1px solid var(--line); }
+  .start .label { margin-top: 0; }
+  .start p { margin: 12px 0 0; font-size: 14px; }
+  .start pre {
+    margin: 14px 0 0; padding: 13px 16px; background: var(--surface); border-radius: 2px; overflow-x: auto;
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.9;
+  }
+  .start img { display: block; width: 100%; height: auto; margin: 18px 0 0; }
+  .news { margin-top: 44px; }
+
+  @media (max-width: 480px) {
+    .intro h1 { font-size: 23px; }
+    .features { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>
+{{ end }}
+
+{{ define "main" }}
+  {{- $first := true }}
+  {{- with .Paginator }}{{ $first = not .HasPrev }}{{ end }}
+  {{- if $first }}
+  <section class="intro">
+    <h1>Write in Markdown.<br>Manage content in your browser.<br>Publish on your terms.</h1>
+    <p class="lede">Kite is an open-source publishing platform that gives you the writing experience of a CMS and the portability of a static site generator. It is a single Go binary with the studio built in.</p>
+    <p class="actions">
+      <a class="button" href="/docs/#getting-started">Get started</a>
+      <a href="https://github.com/kite-plus/kite">Source on GitHub</a>
+    </p>
+  </section>
+
+  <ul class="features">
+    <li>
+      <h2>A studio in your browser</h2>
+      <p>A visual editor that reads and writes Markdown, with the source one click away, image uploads, tags, categories and drafts.</p>
+    </li>
+    <li>
+      <h2>Files that stay yours</h2>
+      <p>Content is plain Markdown on disk. Saving rewrites only what changed and keeps your key order and comments, so editing a title is a one-line <code>git diff</code>.</p>
+    </li>
+    <li>
+      <h2>Publish your way</h2>
+      <p>Export static pages for any host, run the site on your own server, or commit and push through Git.</p>
+    </li>
+    <li>
+      <h2>Nothing else to install</h2>
+      <p>The studio, a default theme with light and dark modes, and the SQLite driver are compiled into the binary.</p>
+    </li>
+  </ul>
+
+  <section class="start">
+    <h2 class="label">How it works</h2>
+    <p>Your Markdown files are the source of truth. The studio edits them in place, and the index Kite keeps beside them is only a cache: delete it, rebuild, and the same data comes back. The same files become static pages with <code>kite build</code>, a live site with <code>kite run</code>, or a Git commit with <code>kite publish</code>.</p>
+    <img src="/images/workflow.svg" alt="One Markdown file goes through kite to three outputs: kite build writes static HTML to public/, kite run serves the site and the studio on localhost:1717, and kite publish commits and pushes with Git" width="1200" height="464">
+  </section>
+
+  <section class="start">
+    <h2 class="label">Try it</h2>
+    <pre><code>kite init blog
+cd blog
+kite new post "Hello, Kite"
+kite run</code></pre>
+    <p>Then open the studio at <code>localhost:1717/admin/</code> and start writing. Kite is in early development and has no release yet, so it is <a href="/docs/#getting-started">installed from source or run with Docker</a>.</p>
+  </section>
+  {{- end }}
+
+  <section class="news">
+    <h2 class="label">News</h2>
+    {{ partial "post-list.html" . }}
+    {{ partial "pagination.html" . }}
+  </section>
+{{ end }}

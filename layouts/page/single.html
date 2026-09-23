@@ -1,0 +1,11 @@
+{{- /* The theme's page, with the contents line posts have: the documentation
+       is one long page. */ -}}
+{{ define "main" }}
+  <article class="page">
+    <header class="heading">
+      <h1>{{ .Page.Title }}</h1>
+    </header>
+    {{ partial "toc.html" (dict "page" .Page "site" .Site) }}
+    <div class="content">{{ .Page.Content }}</div>
+  </article>
+{{ end }}
