@@ -49,17 +49,18 @@ make install
 ```
 
 Add Go's binary installation directory (usually `~/go/bin`) to your `PATH`,
-then create a site:
+then start a site in an empty folder:
 
 ```bash
-kite init blog
+mkdir blog
 cd blog
-kite new post "Hello, Kite"
 kite run
 ```
 
-Open the studio at `http://localhost:1717/admin/` to start editing. Next time,
-run `kite run` from the `blog` directory.
+The browser opens on a page that asks what the site is called; answer it and
+you are in the studio at `http://localhost:1717/admin/`. `kite init` asks the
+same questions in the terminal instead. Next time, run `kite run` from the
+`blog` directory.
 
 ### Write and manage
 
@@ -75,8 +76,9 @@ exclude them.
 
 ### Publish
 
-- **Export static pages:** run `kite build` in your site directory, then upload
-  the generated `public/` directory to a static host.
+- **Export static pages:** open Deploy in the studio and export the site as a
+  zip, then upload what is in it to any static host. From the command line,
+  `kite build` writes the same files to `public/`.
 - **Run on a server:** see [Deploying](#deploying) to serve the site on your own
   domain over HTTPS.
 - **Publish through Git:** with a Git remote configured for your site, run
@@ -88,7 +90,9 @@ exclude them.
 
 `kite run` opens the studio at `/admin/`. It is a React application compiled
 into the binary, so there is nothing to install and nothing to keep in sync
-with the server.
+with the server. Run in an empty folder, it opens on a page that creates the
+site there first: its name, address and language, which is what `kite init`
+asks in a terminal.
 
 | | |
 |---|---|
@@ -97,7 +101,8 @@ with the server.
 | **Editor** | A visual editor that reads and writes Markdown, with the source one click away, a live preview, front matter as a form, terms, slug, word count, and files dropped straight into the bundle |
 | **Taxonomies** | tags and categories as they actually exist across the content |
 | **Theme** | the settings the active theme declares in its `theme.yaml`, rendered as a form |
-| **Settings** | title, description, base URL and language |
+| **Deploy** | the site exported as a zip to upload anywhere, or how far a push to GitHub Pages has got |
+| **Settings** | the site's title, description, address, language, author, keywords, time zone, search engine visibility and code added to every page; the studio's own language and colors; your account: profile, picture, password and sessions |
 
 An item that changed on disk since it was loaded is refused rather than
 overwritten, and the studio says so. Editing is available in English and
@@ -135,6 +140,19 @@ kite auth set-password                          # asked for twice, never echoed
 
 `kite auth status` reports whether a project asks for a password, and
 `kite auth remove` takes the account away again.
+
+The same can be done in the studio, under **Settings → Account**. A studio
+open on localhost can be given a password there, and asks for it from that
+moment, without a restart. A guarded one changes its user name and password
+once the current password is confirmed, which signs out every other browser
+and keeps this one; it can also sign the others out without changing
+anything, and on localhost take the password away again. An account that
+comes from the environment is changed where it is set.
+
+The same page holds a profile: a display name, an email address and a
+picture, shown in the studio's menus. They are kept beside the account, in
+`.kite/secrets/profile.json` and `.kite/secrets/avatar`, and never
+published: the author a theme shows is `site.author`.
 
 The account is stored in `.kite/secrets/account.json` as an argon2id hash. It
 is never committed, and it has to survive a deployment for the account to. A
