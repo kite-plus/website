@@ -202,6 +202,31 @@ outside a project.
 The theme contract is not frozen yet; it freezes at M5, after a second theme
 has been written against it.
 
+## Plugins
+
+A plugin adds to a site what its theme does not: comments, analytics, search,
+math. It lives in `plugins/`, one folder each, and runs once it is listed
+under `plugins.enabled` in `kite.yaml`. The studio's Plugins screen installs
+one from a zip archive, turns it on and off and edits its settings, and says
+before a plugin is turned on what it adds to pages and which other sites its
+code loads from. `kite plugin add`, `enable`, `disable`, `list` and `remove`
+do the same from the command line.
+
+| Plugin | Does |
+|---|---|
+| [analytics](https://github.com/kite-plus/plugin-analytics) | Counts visits with Baidu Tongji, Google Analytics, Umami or Plausible |
+| [comments](https://github.com/kite-plus/plugin-comments) | A comment thread under posts, with Giscus, Waline or Twikoo |
+| [math](https://github.com/kite-plus/plugin-math) | TeX math with KaTeX, and mermaid code blocks drawn as diagrams |
+| [search](https://github.com/kite-plus/plugin-search) | Search in the reader's browser, over an index written at build time |
+
+A plugin declares in `plugin.yaml` the code it adds to pages and the settings
+the studio shows for it, and can bring a WebAssembly module whose functions
+run while a site is built: to rewrite a page's markdown or its HTML, or to
+write files of its own once the site is built. A module reaches no network
+and no files, and its clock does not tell the time, so a build stays a
+function of the site. Writing one is described in the
+[reference](https://github.com/kite-plus/kite/blob/main/docs/reference.md#plugins).
+
 ## Configuration
 
 `kite.yaml` sits at the root of a project. Everything except `site` is
@@ -236,6 +261,11 @@ build:
 publish:
   publisher: git
   branch: main
+
+plugins:
+  enabled: []          # the plugins that run, in the order they run in
+  settings:            # whatever each plugin declares in plugin.yaml
+    search: {full_text: true}
 ```
 
 A few keys can be overridden from the environment, for a build whose output
@@ -414,7 +444,7 @@ Verify a download against the `checksums.txt` published with the release.
 | M5 | Public theme contract | |
 | M6 | `kite.lock` and the `kitew` wrapper | |
 | M7 | Dynamic mode backed by SQLite | |
-| M8 | WebAssembly plugins | |
+| M8 | WebAssembly plugins | first version done: injected code and build hooks |
 
 The [roadmap](https://github.com/kite-plus/kite/blob/main/docs/design/roadmap.md) (in Chinese) records what has been verified as done, what remains before v1.0 is tagged, and the plan after it.
 
