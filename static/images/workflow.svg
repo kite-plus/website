@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="464" viewBox="0 0 1200 464" role="img" aria-labelledby="title desc">
-  <title id="title">How Kite works</title>
-  <desc id="desc">One Markdown file, content/posts/why-your-index-lies/index.md, is read and written by kite. From the same file, kite build writes static HTML to public/, kite run serves the site and the studio on localhost:1717, and kite publish --all --push commits and pushes it with Git.</desc>
+  <title id="title">Kite 的工作方式</title>
+  <desc id="desc">一个 Markdown 文件 content/posts/spring-notes/index.md 由 kite 读写。同一份文件，kite build 把静态 HTML 写到 public/，kite run 在 localhost:1717 提供站点和后台，kite publish --all --push 用 Git 提交并推送。</desc>
   <style>
     .canvas { fill: #F6F8FB; stroke: #E3E8F0; }
     .card { fill: #FFFFFF; stroke: #DAE1EB; }
@@ -34,19 +34,19 @@
     <rect class="card" x="48.5" y="48.5" width="428" height="367" rx="14"/>
     <path class="rule" d="M49 148.5H476"/>
     <g class="mono">
-      <text class="muted" x="76" y="92" font-size="17">content/posts/why-your-index-lies/</text>
+      <text class="muted" x="76" y="92" font-size="17">content/posts/spring-notes/</text>
       <text class="ink" x="76" y="126" font-size="24" font-weight="600">index.md</text>
       <g class="ink" font-size="21">
         <text class="faint" x="76" y="186">---</text>
-        <text x="76" y="218"><tspan class="key">title:</tspan> Why Your Index Lies</text>
+        <text x="76" y="218"><tspan class="key">title:</tspan> 春日杂记</text>
         <text x="76" y="250"><tspan class="key">status:</tspan> published</text>
-        <text x="76" y="282"><tspan class="key">tags:</tspan> [systems, storage]</text>
+        <text x="76" y="282"><tspan class="key">tags:</tspan> [随笔, 草木]</text>
         <text class="faint" x="76" y="314">---</text>
       </g>
     </g>
     <g class="serif ink" font-size="22">
-      <text x="76" y="356">A derived index has exactly one</text>
-      <text x="76" y="388">job: be provably rebuildable.</text>
+      <text x="76" y="356">院子里的玉兰开了，</text>
+      <text x="76" y="388">记下这个春天的第一天。</text>
     </g>
   </g>
 

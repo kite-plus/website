@@ -1,23 +1,17 @@
 ---
 id: 01M36K6Y42S2VNF6JVCGCYEK14
-title: A website for Kite
+title: 官网上线了
 slug: a-website-for-kite
 status: published
 created_at: 2026-09-23T07:38:17Z
-published_at: 2026-09-23T07:38:17Z
+updated_at: 2026-09-26T21:00:00Z
+published_at: 2026-09-26T21:00:00Z
+description: "官网本身就是一个 Kite 站点，托管在 Vercel 上。"
+tags: [公告]
 ---
 
-Kite has a website, and it is a Kite site itself. The pages are Markdown files
-in a Git repository, the studio edits them, and every push to `main` builds the
-site with `kite build --verify` and deploys it to GitHub Pages, through the
-same workflow `kite init` writes for any new site.
+Kite 有了官网，就是你正在看的这个。它本身就是一个 Kite 站点：页面是 Git 仓库里的 Markdown 文件，在 Kite 的后台里写，由 `kite build --verify` 构建。
 
-This post went out the way a post on any Kite site does: `kite publish --push`
-committed the post and nothing else, and the push deployed it.
+外观用的是 Kite 的文档主题[风标](/posts/vane/)，搜索用的是官方的[站内搜索插件](https://github.com/kite-plus/plugin-search)，都和任何一个 Kite 站点能装的一样。站点托管在 Vercel：每次推送到仓库，Vercel 下载一个固定版本的 Kite，构建出静态页面并上线，具体做法见[导出静态站点](/export/)。
 
-The [documentation](/docs/) covers installing Kite, writing in the studio and
-publishing. Kite is still in early development. Static builds, live serving,
-the browser studio and Git publishing are done, and a few items remain before
-v1.0 is tagged; the
-[roadmap](https://github.com/kite-plus/kite/blob/main/docs/design/roadmap.md)
-tracks them.
+[文档](/docs/)讲了怎么安装 Kite、在后台写作和发布站点。Kite 仍在早期开发中，已经完成和还在路上的，见[路线图](/roadmap/)。网站的源码在 [kite-plus/website](https://github.com/kite-plus/website)。

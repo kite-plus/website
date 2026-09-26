@@ -1,20 +1,117 @@
 site:
   title: Kite
-  description: Open-source publishing in a single binary
+  description: 开源的博客程序：在浏览器里写 Markdown，发布成静态站点，或者跑在自己的服务器上。
   baseURL: https://www.kite.plus
-  language: en
+  language: zh-CN
+  author: Kite Plus
+  keywords: [Kite, 博客, 博客程序, Markdown, 静态站点, 开源]
+  timezone: Asia/Shanghai
 
 content:
   store: file
   dir: content
 
 theme:
+  name: vane
   settings:
-    # The logo's blue, darkened until links clear 4.5:1 on white.
-    accent: "#3d65bd"
-    nav: |-
-      Docs | /docs/
-      GitHub | https://github.com/kite-plus/kite
+    logo: /logo.svg
+    favicon: /favicon.ico
+    nav:
+      - {label: 文档, url: /docs/}
+      - {label: 新闻, url: /posts/}
+      - {label: GitHub, url: https://github.com/kite-plus/kite}
+    button_label: 下载
+    button_url: https://github.com/kite-plus/kite/releases/latest
+    sidebar:
+      - title: 开始
+        pages:
+          - {label: 简介, url: /docs/}
+          - {label: 安装, url: /install/}
+          - {label: 快速开始, url: /quick-start/}
+      - title: 写作
+        pages:
+          - {label: 写作后台, url: /studio/}
+          - {label: 内容与文件, url: /content/}
+          - {label: 账号与登录, url: /account/}
+      - title: 发布
+        pages:
+          - {label: 导出静态站点, url: /export/}
+          - {label: GitHub Pages, url: /github-pages/}
+          - {label: Git 发布, url: /git-publish/}
+          - {label: 服务器部署, url: /server/}
+      - title: 扩展
+        pages:
+          - {label: 使用主题, url: /using-themes/}
+          - {label: 编写主题, url: /writing-themes/}
+          - {label: 使用插件, url: /using-plugins/}
+          - {label: 编写插件, url: /writing-plugins/}
+      - title: 参考
+        pages:
+          - {label: 配置, url: /configuration/}
+          - {label: 命令行, url: /cli/}
+          - {label: 路线图, url: /roadmap/}
+          - {label: 参与贡献, url: /contributing/}
+    badge_tag: "0.1"
+    badge_text: Kite 0.1.0 发布了
+    badge_link: /posts/kite-0-1-0/
+    hero_title: |-
+      写博客，
+      在浏览器里就够了
+    hero_text: Kite 是一个开源的博客程序：在浏览器里的后台写作，文章都是归你所有的 Markdown 文件；可以导出成静态站点放到任何地方，也能直接跑在自己的服务器上。整个程序只有一个文件。
+    actions:
+      - {label: 开始使用, url: /quick-start/}
+      - {label: GitHub, url: https://github.com/kite-plus/kite}
+    hero_command: kite run
+    hero_image: /images/studio-light.webp
+    hero_image_dark: /images/studio-dark.webp
+    features_title: Kite 能做什么
+    features:
+      - title: 在浏览器里写作
+        text: 可视化编辑器直接读写 Markdown，一键切到源码；图片拖进来就上传，草稿、定时发布都在后台里。
+        link: /studio/
+      - title: 文件始终属于你
+        text: 内容就是磁盘上的 Markdown 文件。保存时只改真正变化的部分，改个标题，git diff 只有一行。
+        link: /content/
+      - title: 发布方式由你选
+        text: 导出 zip 放到任何托管平台，交给 GitHub Pages，用 Git 推送，或者用 Docker 跑在服务器上。
+        link: /export/
+      - title: 主题和插件
+        text: 换主题之前先在整站上预览；评论、统计、站内搜索、公式与图表都有官方插件。
+        link: /using-themes/
+    more_title: Kite Plus
+    more_text: 围绕内容创作、发布与发现，构建开源工具。你写下的内容保存在自己掌握的文件里，发布到哪里一直由你决定。
+    more:
+      - title: Kite
+        text: 以 Markdown 为基础的内容发布平台，负责创作与发布，也就是这个网站介绍的程序。
+        note: 0.1 · 早期开发
+        link: https://github.com/kite-plus/kite
+      - title: Explore
+        text: 内容聚合与发现平台，汇集大家发布的内容，帮读者找到它们。
+        note: 开发中
+        link: https://github.com/kite-plus/explore
+    social:
+      github: https://github.com/kite-plus/kite
+    footer_columns:
+      - title: 文档
+        links:
+          - {label: 快速开始, url: /quick-start/}
+          - {label: 安装, url: /install/}
+          - {label: 写作后台, url: /studio/}
+          - {label: 导出静态站点, url: /export/}
+      - title: 扩展
+        links:
+          - {label: 使用主题, url: /using-themes/}
+          - {label: 使用插件, url: /using-plugins/}
+          - {label: 风标主题, url: https://github.com/kite-plus/theme-vane}
+      - title: Kite Plus
+        links:
+          - {label: GitHub, url: https://github.com/kite-plus}
+          - {label: 版本发布, url: https://github.com/kite-plus/kite/releases}
+          - {label: 新闻, url: /posts/}
+    copyright: © 2026 Kite Plus · 以 Apache-2.0 协议开源
 
 build:
   output: public
+plugins:
+  enabled:
+    - search

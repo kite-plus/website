@@ -1,0 +1,134 @@
+{{ define "main" }}
+{{- $s := .Site.ThemeSettings -}}
+{{- $lang := .Site.Language -}}
+{{- $site := .Site -}}
+{{- if and .Paginator (gt .Paginator.PageNumber 1) }}
+  {{- /* Kite pages the home page by the news, so a later page of it is a
+         page of the news. */}}
+<div class="listing">
+  <header class="listing-header">
+    <h1>{{ partial "t.html" (dict "k" "news" "lang" $lang) }}</h1>
+  </header>
+  {{ partial "post-list.html" . }}
+  {{ partial "pagination.html" . }}
+</div>
+{{- else }}
+<section class="hero">
+  {{- with $s.badge_text }}
+  {{- if $s.badge_link }}<a class="badge" href="{{ url.Rel $s.badge_link }}">{{ else }}<p class="badge">{{ end }}
+    {{- with $s.badge_tag }}<span class="badge-tag">{{ . }}</span>{{ end }}<span>{{ . }}</span>
+  {{- if $s.badge_link }}{{ partial "icon.html" "next" }}</a>{{ else }}</p>{{ end }}
+  {{- end }}
+  <h1 class="hero-title">{{ with $s.hero_title }}{{ range $i, $line := str.Split "\n" . }}{{ if $i }}<br>{{ end }}{{ $line }}{{ end }}{{ else }}{{ $site.Title }}{{ end }}</h1>
+  {{- $tagline := $s.hero_text }}
+  {{- if not $tagline }}{{ $tagline = $site.Description }}{{ end }}
+  {{- with $tagline }}
+  <p class="hero-tagline">{{ . }}</p>
+  {{- end }}
+  {{- $first := "" }}
+  {{- range $s.sidebar }}{{ range .pages }}{{ if and .label .url (not $first) }}{{ $first = .url }}{{ end }}{{ end }}{{ end }}
+  {{- $any := false }}
+  {{- range $s.actions }}{{ if and .label .url }}{{ $any = true }}{{ end }}{{ end }}
+  {{- if or $any $first $s.hero_command }}
+  <div class="hero-actions">
+    {{- if $any }}
+      {{- $main := true }}
+      {{- range $s.actions }}
+        {{- if and .label .url }}
+          {{- $class := "button" }}
+          {{- if $main }}{{ $class = "button primary" }}{{ end }}
+    {{ partial "link.html" (dict "label" .label "url" .url "lang" $lang "class" $class) }}
+          {{- $main = false }}
+        {{- end }}
+      {{- end }}
+    {{- else if $first }}
+    {{ partial "link.html" (dict "label" (partial "t.html" (dict "k" "get_started" "lang" $lang)) "url" $first "lang" $lang "class" "button primary") }}
+    {{- end }}
+    {{- with $s.hero_command }}
+    <div class="command"><span class="prompt" aria-hidden="true">$</span><code>{{ . }}</code></div>
+    {{- end }}
+  </div>
+  {{- end }}
+  {{- with $s.hero_image }}
+  <figure class="hero-shot">
+    <img{{ if $s.hero_image_dark }} class="only-light"{{ end }} src="{{ url.Rel . }}" alt="">
+    {{- with $s.hero_image_dark }}
+    <img class="only-dark" src="{{ url.Rel . }}" alt="">
+    {{- end }}
+  </figure>
+  {{- end }}
+</section>
+{{- $features := false }}
+{{- range $s.features }}{{ if or .title .text }}{{ $features = true }}{{ end }}{{ end }}
+{{- if $features }}
+<section class="features">
+  {{- with $s.features_title }}
+  <h2 class="section-label">{{ . }}</h2>
+  {{- end }}
+  <div class="feature-grid">
+    {{- $n := 0.0 }}
+    {{- range $s.features }}
+      {{- if or .title .text }}
+        {{- $n = math.Add $n 1 }}
+        {{- if .link }}
+    <a class="feature" href="{{ url.Rel .link }}">
+        {{- else }}
+    <div class="feature">
+        {{- end }}
+      <span class="feature-number" aria-hidden="true">{{ printf "%02.0f" $n }}</span>
+      {{- with .title }}<h3>{{ . }}</h3>{{ end }}
+      {{- with .text }}<p>{{ . }}</p>{{ end }}
+        {{- if .link }}</a>{{ else }}</div>{{ end }}
+      {{- end }}
+    {{- end }}
+  </div>
+</section>
+{{- end }}
+{{- if and $s.show_news .Pages }}
+<section class="home-news">
+  <div class="home-news-header">
+    <h2 class="section-label">{{ partial "t.html" (dict "k" "latest_news" "lang" $lang) }}</h2>
+    <a href="{{ url.For "list" "post" }}">{{ partial "t.html" (dict "k" "all_news" "lang" $lang) }}{{ partial "icon.html" "next" }}</a>
+  </div>
+  <ul class="news-rows">
+    {{- range $i, $p := .Pages }}
+      {{- if lt $i 3 }}
+    <li><a class="news-row" href="{{ $p.RelPermalink }}">
+      <time datetime="{{ time.Format "2006-01-02" $p.PublishDate }}">{{ time.Format "2006-01-02" $p.PublishDate }}</time>
+      <span class="news-title">{{ $p.Title }}</span>
+      {{- with $p.Excerpt }}
+      <span class="news-excerpt">{{ . }}</span>
+      {{- end }}
+    </a></li>
+      {{- end }}
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+{{- $more := false }}
+{{- range $s.more }}{{ if .title }}{{ $more = true }}{{ end }}{{ end }}
+{{- if $more }}
+<section class="home-more">
+  {{- with $s.more_title }}
+  <h2 class="section-label">{{ . }}</h2>
+  {{- end }}
+  {{- with $s.more_text }}
+  <p class="more-text">{{ . }}</p>
+  {{- end }}
+  <ul class="news-rows">
+    {{- range $s.more }}
+      {{- if .title }}
+        {{- $external := and .link (or (str.HasPrefix "http://" .link) (str.HasPrefix "https://" .link)) }}
+    <li>{{ if .link }}<a class="news-row more-row" href="{{ url.Rel .link }}"{{ if $external }} target="_blank" rel="noopener"{{ end }}>{{ else }}<div class="news-row more-row">{{ end }}
+      <span class="more-note">{{ .note }}</span>
+      <span class="news-title">{{ .title }}</span>
+      <span class="news-excerpt">{{ .text }}</span>
+      {{- if .link }}{{ if $external }}{{ partial "icon.html" "external" }}{{ else }}{{ partial "icon.html" "next" }}{{ end }}</a>{{ else }}</div>{{ end }}</li>
+      {{- end }}
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+<div class="home-end"></div>
+{{- end }}
+{{ end }}
