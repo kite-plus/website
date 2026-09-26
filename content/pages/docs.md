@@ -7,26 +7,43 @@ created_at: 2026-09-23T07:34:37Z
 published_at: 2026-09-23T07:34:37Z
 ---
 
-Kite is in early development and has no release yet. Install it from source,
-or run it with Docker; both build the full studio.
+Kite is in early development: 0.1 is its first release, and things may still
+change from one version to the next.
 
 ## Getting started
 
-### With Docker
+### Download
 
-With Git and Docker installed, run:
+Download the archive for your system from the
+[latest release](https://github.com/kite-plus/kite/releases/latest), unpack it,
+and put `kite` somewhere on your `PATH`. Then start a site in an empty folder:
 
 ```bash
-git clone https://github.com/kite-plus/kite.git
-cd kite
-docker build -t kite .
-docker run -d --name kite --restart unless-stopped -p 127.0.0.1:1717:1717 -v kite-data:/data kite
+mkdir blog
+cd blog
+kite run
+```
+
+The browser opens on a page that asks what the site is called; answer it and
+you are in the studio at `http://localhost:1717/admin/`. `kite init` asks the
+same questions in the terminal instead. Next time, run `kite run` from the
+`blog` folder.
+
+On macOS, a downloaded program is held back the first time it runs;
+`xattr -d com.apple.quarantine kite` lets it through. Every archive can be
+checked against `checksums.txt` in the release.
+
+### With Docker
+
+To run the site on a server, with Docker installed:
+
+```bash
+docker run -d --name kite --restart unless-stopped -p 127.0.0.1:1717:1717 -v kite-data:/data ghcr.io/kite-plus/kite:latest
 ```
 
 Open the studio at `http://localhost:1717/admin/` and follow the setup steps to
 name your site and create an admin account. Your site is at
-`http://localhost:1717`. The first build downloads dependencies and may take a
-while.
+`http://localhost:1717`.
 
 Content and your account are stored in the `kite-data` volume. To stop or
 restart:
@@ -36,7 +53,7 @@ docker stop kite
 docker start kite
 ```
 
-### Without Docker
+### From source
 
 Requires Git, Make, Go 1.26.4+, Node.js 22.19.0, and pnpm 10.11.1. The build
 uses the Go toolchain pinned by the project.
@@ -49,18 +66,7 @@ make install
 ```
 
 Add Go's binary installation directory (usually `~/go/bin`) to your `PATH`,
-then start a site in an empty folder:
-
-```bash
-mkdir blog
-cd blog
-kite run
-```
-
-The browser opens on a page that asks what the site is called; answer it and
-you are in the studio at `http://localhost:1717/admin/`. `kite init` asks the
-same questions in the terminal instead. Next time, run `kite run` from the
-`blog` directory.
+then start a site as above.
 
 ### Write and manage
 
@@ -440,13 +446,13 @@ Verify a download against the `checksums.txt` published with the release.
 | M1 | `kite serve`: render per request, watch and reload | done |
 | M2 | Read-only admin over an existing repository | done |
 | M3 | Editing admin: editor, media, conflict handling | done |
-| M4 | Git publisher — **v1.0** | done, wrapping up before the tag |
+| M4 | Git publisher — the first release, **0.1** | done |
 | M5 | Public theme contract | |
 | M6 | `kite.lock` and the `kitew` wrapper | |
 | M7 | Dynamic mode backed by SQLite | |
 | M8 | WebAssembly plugins | first version done: injected code and build hooks |
 
-The [roadmap](https://github.com/kite-plus/kite/blob/main/docs/design/roadmap.md) (in Chinese) records what has been verified as done, what remains before v1.0 is tagged, and the plan after it.
+The [roadmap](https://github.com/kite-plus/kite/blob/main/docs/design/roadmap.md) (in Chinese) records what has been verified as done and the plan after it.
 
 ## Contributing
 
