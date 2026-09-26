@@ -1,10 +1,10 @@
 site:
   title: Kite
-  description: 开源的博客程序：在浏览器里写 Markdown，发布成静态站点，或者跑在自己的服务器上。
+  description: Kite 是一个开源的 Markdown 博客程序：在浏览器里的后台写作，文章保存为你自己的 Markdown 文件；可以导出成静态站点、部署到 GitHub Pages，也能用 Docker 跑在自己的服务器上。
   baseURL: https://www.kite.plus
   language: zh-CN
   author: Kite Plus
-  keywords: [Kite, 博客, 博客程序, Markdown, 静态站点, 开源]
+  keywords: [Kite, 博客程序, 开源博客, Markdown 博客, 博客系统, 静态站点生成器, 写作后台, GitHub Pages, Hugo, Hexo]
   timezone: Asia/Shanghai
   headHTML: |-
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -18,7 +18,9 @@ theme:
   name: vane
   settings:
     logo: /logo.svg
+    tagline: 开源的 Markdown 博客程序
     favicon: /favicon.ico
+    share_image: /images/share.jpg
     nav:
       - {label: 文档, url: /docs/}
       - {label: 新闻, url: /posts/}
