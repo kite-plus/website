@@ -6,6 +6,9 @@ site:
   author: Kite Plus
   keywords: [Kite, 博客, 博客程序, Markdown, 静态站点, 开源]
   timezone: Asia/Shanghai
+  headHTML: |-
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 content:
   store: file
