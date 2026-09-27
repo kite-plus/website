@@ -18,11 +18,14 @@ theme:
   name: vane
   settings:
     logo: /logo.svg
+    logo_dark: /logo-dark.svg
     tagline: 开源的 Markdown 博客程序
     favicon: /favicon.ico
     share_image: /images/share.jpg
     nav:
       - {label: 文档, url: /docs/}
+      - {label: 主题, url: /using-themes/}
+      - {label: 插件, url: /using-plugins/}
       - {label: 新闻, url: /posts/}
       - {label: GitHub, url: https://github.com/kite-plus/kite}
     button_label: 下载
@@ -61,28 +64,81 @@ theme:
     badge_link: /posts/kite-0-1-0/
     hero_title: |-
       写博客，
-      在浏览器里就够了
+      在*浏览器里*就够了
     hero_text: Kite 是一个开源的博客程序：在浏览器里的后台写作，文章都是归你所有的 Markdown 文件；可以导出成静态站点放到任何地方，也能直接跑在自己的服务器上。整个程序只有一个文件。
     actions:
       - {label: 开始使用, url: /quick-start/}
       - {label: GitHub, url: https://github.com/kite-plus/kite}
     hero_command: kite run
-    hero_image: /images/studio-light.webp
-    hero_image_dark: /images/studio-dark.webp
+    showcase_label: 写 · 读
+    showcase_title: 在后台写，读者看到的是这样
+    showcase_text: 底下这张是 Kite 的写作后台，分类、标签和链接就写在标题下面；叠在上面的，是同一篇文章发布以后的样子，用的是默认主题「草木集」。
+    showcase_image: /images/home/studio-light.webp
+    showcase_image_dark: /images/home/studio-dark.webp
+    showcase_alt: Kite 的写作后台，正在编辑一篇读书笔记，标题下面是它的分类、标签和链接
+    showcase_image2: /images/home/post-light.webp
+    showcase_image2_dark: /images/home/post-dark.webp
+    showcase_alt2: 同一篇读书笔记发布以后，在默认主题草木集里的样子
+    showcase_note: 点「更新」
+    showcase_note_text: 文章就到了站点上
+    features_label: 四件事
     features_title: Kite 能做什么
     features:
       - title: 在浏览器里写作
         text: 可视化编辑器直接读写 Markdown，一键切到源码；图片拖进来就上传，草稿、定时发布都在后台里。
         link: /studio/
+        sample: page
+        page_title: 读书笔记：瓦尔登湖
+        page_text: 重读梭罗，记下几处当时划线的地方。
+        page_chips:
+          - {icon: folder, label: 读书}
+          - {icon: tags, label: 读书笔记、梭罗}
+          - {icon: link, label: /posts/walden-notes}
       - title: 文件始终属于你
         text: 内容就是磁盘上的 Markdown 文件。保存时只改真正变化的部分，改个标题，git diff 只有一行。
         link: /content/
+        sample: code
+        code_title: content/posts/walden-notes/index.md
+        code: |-
+          - title: 读书笔记：瓦尔登湖
+          + title: 重读《瓦尔登湖》
+            slug: walden-notes
       - title: 发布方式由你选
-        text: 导出 zip 放到任何托管平台，交给 GitHub Pages，用 Git 推送，或者用 Docker 跑在服务器上。
+        text: 导出 zip 放到任何托管平台，交给 GitHub Pages，用 Git 推送，或者用 Docker 跑在自己的服务器上。
         link: /export/
+        sample: tiles
+        tiles:
+          - {icon: archive, label: 导出 zip}
+          - {icon: github, label: GitHub Pages}
+          - {icon: git-branch, label: Git 推送}
+          - {icon: container, label: Docker}
       - title: 主题和插件
         text: 换主题之前先在整站上预览；评论、统计、站内搜索、公式与图表都有官方插件。
         link: /using-themes/
+        sample: pictures
+        picture: /images/home/theme-caomu-light.webp
+        picture_dark: /images/home/theme-caomu-dark.webp
+        picture2: /images/home/theme-vane-light.webp
+        picture2_dark: /images/home/theme-vane-dark.webp
+        pills:
+          - {icon: search, label: 站内搜索}
+          - {icon: message, label: 评论}
+          - {icon: chart, label: 统计}
+          - {icon: sigma, label: 公式与图表}
+    gallery_label: 主题
+    gallery_title: 换一套主题，整个站点跟着变
+    gallery_text: 主题的设置在后台点选，改动先在整站上预览，满意了再用上。
+    gallery:
+      - image: /images/home/theme-caomu-light.webp
+        image_dark: /images/home/theme-caomu-dark.webp
+        title: 草木集
+        note: 博客主题 · 默认
+        link: /using-themes/
+      - image: /images/home/theme-vane-light.webp
+        image_dark: /images/home/theme-vane-dark.webp
+        title: 风标
+        note: 文档主题 · 本站在用
+        link: https://github.com/kite-plus/theme-vane
     more_title: Kite Plus
     more_text: 围绕内容创作、发布与发现，构建开源工具。你写下的内容保存在自己掌握的文件里，发布到哪里一直由你决定。
     more:
@@ -90,12 +146,13 @@ theme:
         text: 以 Markdown 为基础的内容发布平台，负责创作与发布，也就是这个网站介绍的程序。
         note: 0.1 · 早期开发
         link: https://github.com/kite-plus/kite
+        link_label: GitHub
       - title: Explore
         text: 内容聚合与发现平台，汇集大家发布的内容，帮读者找到它们。
         note: 开发中
-        link: https://github.com/kite-plus/explore
-    social:
-      github: https://github.com/kite-plus/kite
+        note_quiet: true
+        link: https://github.com/kite-plus
+        link_label: 了解进展
     footer_columns:
       - title: 文档
         links:

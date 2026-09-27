@@ -2,29 +2,29 @@
   <title id="title">Kite 的工作方式</title>
   <desc id="desc">一个 Markdown 文件 content/posts/spring-notes/index.md 由 kite 读写。同一份文件，kite build 把静态 HTML 写到 public/，kite run 在 localhost:1717 提供站点和后台，kite publish --all --push 用 Git 提交并推送。</desc>
   <style>
-    .canvas { fill: #F6F8FB; stroke: #E3E8F0; }
-    .card { fill: #FFFFFF; stroke: #DAE1EB; }
-    .rule { stroke: #DAE1EB; }
-    .ink { fill: #1F2733; }
-    .muted { fill: #667285; }
-    .faint { fill: #A7B0BF; }
-    .key { fill: #3D68C8; }
+    .canvas { fill: #FFFDF8; stroke: #E6DCC9; }
+    .card { fill: #FFFFFF; stroke: #E6DCC9; }
+    .rule { stroke: #E6DCC9; }
+    .ink { fill: #1F1C17; }
+    .muted { fill: #675F53; }
+    .faint { fill: #9A9081; }
+    .key { fill: #3A66C4; }
     .mark { fill: #4A77D6; }
     .line { fill: none; stroke: #4A77D6; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .tint { fill: #EBF1FC; }
+    .tint { fill: #E4EAF6; }
     .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
     .serif { font-family: 'Noto Serif SC', 'Songti SC', Georgia, 'Times New Roman', serif; }
     @media (prefers-color-scheme: dark) {
-      .canvas { fill: #131A24; stroke: #242E3C; }
-      .card { fill: #18212E; stroke: #2A3546; }
-      .rule { stroke: #2A3546; }
-      .ink { fill: #E6EDF5; }
-      .muted { fill: #98A4B6; }
-      .faint { fill: #566378; }
-      .key { fill: #8FB0F4; }
-      .mark { fill: #6F97EC; }
-      .line { stroke: #6F97EC; }
-      .tint { fill: #1D2A40; }
+      .canvas { fill: #1B1C21; stroke: #2D2E34; }
+      .card { fill: #17181D; stroke: #2D2E34; }
+      .rule { stroke: #2D2E34; }
+      .ink { fill: #EFE8DA; }
+      .muted { fill: #A39C8F; }
+      .faint { fill: #6F6A61; }
+      .key { fill: #8FB0FF; }
+      .mark { fill: #8FB0FF; }
+      .line { stroke: #8FB0FF; }
+      .tint { fill: #232736; }
     }
   </style>
 
