@@ -42,6 +42,7 @@ theme:
           - {label: 简介, url: /docs/}
           - {label: 安装, url: /install/}
           - {label: 快速开始, url: /quick-start/}
+          - {label: 从 Hugo、Hexo 迁移, url: /migrate/}
       - title: 写作
         pages:
           - {label: 写作后台, url: /studio/}

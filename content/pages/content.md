@@ -4,7 +4,7 @@ title: 内容与文件
 slug: content
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-09-26T20:00:00Z
+updated_at: 2026-09-29T11:08:00Z
 published_at: 2026-09-26T20:00:00Z
 description: "内容就是磁盘上的 Markdown 文件，Kite 只改写真正变化的部分。"
 ---
@@ -13,10 +13,12 @@ description: "内容就是磁盘上的 Markdown 文件，Kite 只改写真正变
 
 | 类型 | 文件 | 地址 |
 | --- | --- | --- |
-| 文章 | `content/posts/<地址>/index.md`，图片和它放在同一个目录 | `/posts/<地址>/` |
+| 文章 | `content/posts/<地址>/index.md`，图片和它放在同一个目录；也可以是单个文件 `content/posts/<地址>.md` | `/posts/<地址>/` |
 | 页面 | `content/pages/<地址>.md` | `/<地址>/` |
 
-文章可以有标签和分类。静态资源放在 `static/` 下，原样发布到站点根目录。
+文章可以有标签和分类。文章目录里的子目录原样随它发布，放在 `images/` 里的图片照样显示。静态资源放在 `static/` 下，原样发布到站点根目录。
+
+地址里可以带路径：地址是 `projects/tideline` 的页面发布在 `/projects/tideline/`。地址和另一个页面相同的内容，比如叫 `posts` 的页面，会让构建停下并指出是哪个。
 
 ## front matter
 
@@ -43,10 +45,14 @@ tags: [随笔, 草木]
 | `status` | `draft`（草稿）、`scheduled`（定时）、`published`（已发布）或 `archived`（归档） |
 | `created_at`、`updated_at`、`published_at` | 创建、更新和发布的时间 |
 | `description` | 摘要：会写进页面的 description，列表和订阅里的摘要也优先用它 |
+| `cover` | 封面；写 `cover: false` 表示不用封面，编辑器里的「不用封面」写的就是它 |
+| `aliases` | 这篇内容以前的地址，每个都会发布一个跳转到它的页面，见[从 Hugo、Hexo 迁移](/migrate/) |
 | `tags`、`categories` | 文章的标签和分类 |
 | `layout` | 选用主题提供的模板，见[使用主题](/using-themes/) |
 
 其他键原样保留，主题可以读到它们。
+
+没写 `description` 时，列表里显示正文的开头；正文里单独一行 `<!--more-->` 时，显示它前面的全部文字。标题的锚点按标题文字生成，`## 近况` 的地址是 `#近况`。
 
 ## 只改真正变化的部分
 
@@ -56,15 +62,15 @@ tags: [随笔, 草木]
 
 日期在未来的文章，状态是 `scheduled` 还是 `published` 都一样，要等到那个时间才公开，这和 Hugo、Jekyll 的做法相同。静态站点只有在文章的时间之后构建过，才会出现这篇文章；`kite build` 会显示下一篇定时文章的时间。
 
-## 从 Hugo 迁过来
+## 从 Hugo、Hexo 迁过来
 
-Kite 读取 Hugo 和 Hexo 的写法：`date`、`lastmod` 和 `draft` 都认，保存时改写成 Kite 自己的键。一个已有的站点可以直接打开，只有 `id` 需要补上：
+Hugo 站点原地就能打开，`date`、`lastmod`、`draft` 和 `summary` 都认，只有 `id` 需要补上：
 
 ```bash
 kite doctor --fix-ids
 ```
 
-`kite doctor` 检查项目里的问题，`--fix-ids` 给每个没有 `id` 的内容补上一个。
+`kite doctor` 检查项目里的问题，`--fix-ids` 给每个没有 `id` 的内容补上一个。Hexo 站点用 `kite import hexo` 导入。两边的细节见[从 Hugo、Hexo 迁移](/migrate/)。
 
 ## 索引
 

@@ -4,7 +4,7 @@ title: 命令行
 slug: cli
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-09-26T20:00:00Z
+updated_at: 2026-09-29T11:08:00Z
 published_at: 2026-09-26T20:00:00Z
 description: "kite 的每个命令，以及最常用的参数。"
 ---
@@ -35,6 +35,7 @@ description: "kite 的每个命令，以及最常用的参数。"
 | 命令 | 作用 |
 | --- | --- |
 | `kite doctor` | 检查项目里的问题；`--fix-ids` 给没有 `id` 的内容补上 |
+| `kite import hexo <Hexo 站点> [目录]` | 把 Hexo 站点的内容导入一个新站点或已有站点，旧地址都成为别名，见[从 Hugo、Hexo 迁移](/migrate/) |
 | `kite index` | 更新索引；`--rebuild` 丢掉重建 |
 | `kite auth` | `set-password`、`status`、`remove`，管理后台的账号，见[账号与登录](/account/) |
 | `kite openapi` | 输出这个版本 API 的 OpenAPI 描述 |

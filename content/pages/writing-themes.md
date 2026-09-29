@@ -4,7 +4,7 @@ title: 编写主题
 slug: writing-themes
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-09-26T20:00:00Z
+updated_at: 2026-09-29T11:08:00Z
 published_at: 2026-09-26T20:00:00Z
 description: "theme.yaml 声明设置，layouts 放模板，kite theme verify 检查契约。"
 ---
@@ -74,6 +74,14 @@ layouts:
 ## 代码高亮
 
 页面里的代码按类名而不是颜色高亮，主题的样式表可以为浅色和深色各带一套配色。从 0.1 之后的版本起，代码块写出来是 `<pre class="chroma" data-lang="go">`，`data-lang` 是作者标注的语言，主题可以用它给代码块加上标题。
+
+## 封面和正文里的图片
+
+文章的封面是 front matter 里的 `cover`，模板从 `.Params.cover` 读到的就是作者写的原文；`.Images` 按出现顺序列出正文里的图片，也是原文。列表里的页面同样带着这两样。主题解析它们的方式，和浏览器解析正文里的图片一样：完整地址原样用，从站点根开始写的用 `url.Rel`，其余的相对于页面地址。没写封面时，主题可以改用正文第一张图；写了 `cover: false` 就不显示封面，编辑器里的「不用封面」写的就是它。
+
+## 模板里的值
+
+front matter 里的值到模板里还是原来的类型，在单页和列表里一样：日期是时间，可以直接交给 `time.Format`；整数是整数，小数是小数。`time.AsTime` 把写成文字的日期读成时间。`math.*` 的参数都是整数时结果也是整数，所以用 `math.Add` 数出来的数能直接和 `8` 比较，`math.Int`、`math.Float` 做转换；`coll.*` 接受任何列表，包括 `.Pages`。
 
 ## 链接
 

@@ -4,7 +4,7 @@ title: 配置
 slug: configuration
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-09-26T20:00:00Z
+updated_at: 2026-09-29T11:08:00Z
 published_at: 2026-09-26T20:00:00Z
 description: "kite.yaml 的全部设置，以及可以用环境变量覆盖的几个。"
 ---
@@ -43,6 +43,7 @@ build:
   sitemap: true
   feed: true
   feedLimit: 20
+  feedAliases: []      # 订阅另外还写到哪些文件，例如 index.xml
 
 publish:
   publisher: git
@@ -61,6 +62,10 @@ plugins:
 ## 写进每个页面的东西
 
 站点的关键词、作者、`noindex` 和自定义代码由主题写进每个页面，模板里对应 `.Site.Keywords`、`.Site.Author`、`.Site.NoIndex`、`.Site.HeadHTML` 和 `.Site.FooterHTML`。单个页面可以在 front matter 里用 `keywords` 写自己的关键词。这些设置，连同每页文章数和订阅文章数，都可以在后台的**设置 → 站点**里修改。自定义代码属于站点而不属于主题，换主题时不会丢。
+
+## 订阅的旧地址
+
+订阅写在 `rss.xml`。站点以前的订阅在别的地址时，比如从 Hugo 迁来的 `index.xml`，把这些地址写进 `feedAliases`，同一份订阅也会写到那里。订阅器不会跟着跳转页走，所以这是留住老读者的办法。
 
 ## 环境变量
 
