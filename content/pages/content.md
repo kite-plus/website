@@ -4,7 +4,7 @@ title: 内容与文件
 slug: content
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-09-29T11:08:00Z
+updated_at: 2026-09-30T20:21:00Z
 published_at: 2026-09-26T20:00:00Z
 description: "内容就是磁盘上的 Markdown 文件，Kite 只改写真正变化的部分。"
 ---
@@ -19,6 +19,31 @@ description: "内容就是磁盘上的 Markdown 文件，Kite 只改写真正变
 文章可以有标签和分类。文章目录里的子目录原样随它发布，放在 `images/` 里的图片照样显示。静态资源放在 `static/` 下，原样发布到站点根目录。
 
 地址里可以带路径：地址是 `projects/tideline` 的页面发布在 `/projects/tideline/`。地址和另一个页面相同的内容，比如叫 `posts` 的页面，会让构建停下并指出是哪个。
+
+## 内容类型
+
+站点有文章和页面，还可以在 `kite.yaml` 里声明自己的种类，放两者都不是的内容，比如作品集里的项目、书单里的书：
+
+```yaml
+content:
+  types:
+    - kind: project
+      label: 项目
+      dir: projects          # 放在 content/projects/，列表页在 /projects/
+      route: /projects/:slug # 默认就是目录加 slug
+      layout: bundle         # 每条一个文件夹；single 是每条一个文件
+      order: weight          # 或 date，新的在前，这是默认
+      feed: false            # 写 true 就和文章一样进订阅
+      taxonomies: [stack]
+      fields:
+        - {key: repo, type: url, label: 仓库地址}
+        - {key: status, type: select, label: 状态,
+           options: [{value: active, label: 进行中}, {value: done, label: 已完成}]}
+```
+
+只有 `kind` 必须写，其余的默认值就是上面写的。声明之后，每一条都有自己的地址、在列表里的位置、种类要求时的订阅条目，以及后台里的表单：后台在文章和页面旁边列出这个种类，按主题设置的画法画出它的字段。模板用 `.Params.repo` 读字段。站点或主题有 `layouts/project/single.html` 和 `layouts/project/list.html` 时用它们画条目和列表，没有就用 `single.html` 和 `list.html`。
+
+`order: weight` 按 front matter 里的 `weight` 从小到大排列和阅读，文档就这样读，`.Prev` 和 `.Next` 也按这个顺序；没有 weight 或者是 0 的排在后面，按标题。种类的名字用小写字母、数字、`-` 和 `_`，条目放在 `content/` 下属于它自己的一个文件夹里，名字和文件夹都不能和别的种类或分类轴相同。`kite serve` 运行时声明或去掉的种类，不用重启就会生效。
 
 ## front matter
 

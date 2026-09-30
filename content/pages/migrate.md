@@ -4,7 +4,7 @@ title: 从 Hugo、Hexo 迁移
 slug: migrate
 status: published
 created_at: 2026-09-29T11:08:00Z
-updated_at: 2026-09-29T11:08:00Z
+updated_at: 2026-09-30T20:21:00Z
 published_at: 2026-09-29T11:08:00Z
 description: "Hugo 站点原地打开，Hexo 站点一条命令导入，旧地址和旧订阅都继续有效。"
 ---
@@ -19,11 +19,15 @@ kite doctor --fix-ids
 
 文章可以是单个文件 `content/posts/hello.md`，Hugo 站点大多这样写；也可以是 bundle `content/posts/hello/index.md`，图片放在旁边，后台新建的文章就是这种。bundle 里的子目录原样随它发布，放在 `images/` 里的图片照样显示；子目录里有自己的 `index.md` 时，它是另一篇文章。两种不论放在 `content/posts/` 的哪一层，地址都是 `/posts/<slug>/`；Hugo 的 `_index.md` 不读。拖到单文件文章里的图片存进站点自己的 `static/uploads/`。
 
+文章以外的栏目，比如 `content/projects/`，给它声明一个内容类型就能读到，见[内容类型](/content/#内容类型)。
+
 slug 里可以带路径：slug 是 `projects/tideline` 的页面发布在 `/projects/tideline/`，和 Hugo 里放在文件夹中的页面一样。地址和另一个页面相同的内容，比如叫 `posts` 的页面，会让构建停下并指出是哪个。
 
 Hugo 写的 front matter 键，Kite 当作自己的来读：`date` 是发布时间，`lastmod` 是最后修改时间，`draft: true` 是草稿；没有 `description` 时，`summary` 就是摘要，列表里显示的是你写的摘要，而不是正文的开头。保存一篇内容时，Kite 会在旁边写上自己的键，并用它们替换 `draft` 和 `summary`。
 
 摘要也可以在正文里截断，Hugo 和 Hexo 都这样写：单独一行 `<!--more-->`，它前面的文字就是摘要，不论多长；页面上这一行什么也不显示。
+
+内容里用到的每个短代码，只要站点或主题里有对应的模板，就照常可用，见[短代码](/shortcodes/)。Hugo 内置的短代码，比如 `figure` 和 `youtube`，Kite 没有内置：构建遇到时会指出名字和所在的行，给它写一个模板只要几行。
 
 标题的锚点按标题文字生成，和 Hugo、GitHub 的规则一样，所以指向某一节的链接迁移后仍然有效：`## 近况` 的地址是 `#近况`，`## Getting Started` 是 `#getting-started`。
 
@@ -41,8 +45,6 @@ Kite 的订阅地址是 `rss.xml`，Hugo 的是 `index.xml`，每个栏目还各
 build:
   feedAliases: [index.xml, posts/index.xml]
 ```
-
-Hugo 的 shortcode，也就是 `{{< … >}}` 这种写法，Kite 还不认，会原样显示成文字，要改写成 Markdown 或 HTML。
 
 ## 从 Hexo 迁移
 

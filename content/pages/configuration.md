@@ -4,7 +4,7 @@ title: 配置
 slug: configuration
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-09-29T11:08:00Z
+updated_at: 2026-09-30T20:21:00Z
 published_at: 2026-09-26T20:00:00Z
 description: "kite.yaml 的全部设置，以及可以用环境变量覆盖的几个。"
 ---
@@ -40,6 +40,7 @@ build:
   output: public
   urlStyle: directory  # 或 extension，产出 /posts/hello.html
   pageSize: 10
+  pagination: {}       # 按列表的种类，如 {home: 0, term: 20}
   sitemap: true
   feed: true
   feedLimit: 20
@@ -63,6 +64,10 @@ plugins:
 
 站点的关键词、作者、`noindex` 和自定义代码由主题写进每个页面，模板里对应 `.Site.Keywords`、`.Site.Author`、`.Site.NoIndex`、`.Site.HeadHTML` 和 `.Site.FooterHTML`。单个页面可以在 front matter 里用 `keywords` 写自己的关键词。这些设置，连同每页文章数和订阅文章数，都可以在后台的**设置 → 站点**里修改。自定义代码属于站点而不属于主题，换主题时不会丢。
 
+## 分页
+
+列表每页显示 `pageSize` 条，除非主题在 `theme.yaml` 里给这种列表另定了分页。`build.pagination` 替站点规定，盖过主题：`home` 是首页，`list` 是某一种内容的列表，如 `/posts/`，`term` 是某个标签或分类的页面。数目写 0 就是全部显示在一页，归档页可以这样列出所有文章，而不用把每个标签的页面也拉得一样长。
+
 ## 订阅的旧地址
 
 订阅写在 `rss.xml`。站点以前的订阅在别的地址时，比如从 Hugo 迁来的 `index.xml`，把这些地址写进 `feedAliases`，同一份订阅也会写到那里。订阅器不会跟着跳转页走，所以这是留住老读者的办法。
@@ -80,3 +85,7 @@ plugins:
 | `KITE_BUILD_OUTPUT` | `build.output` |
 | `KITE_BUILD_URLSTYLE` | `build.urlStyle` |
 | `KITE_BUILD_PAGESIZE` | `build.pageSize` |
+
+## 输出目录
+
+`build.output`（或者代替它的 `KITE_BUILD_OUTPUT`）是 `kite build` 写出站点的目录。相对路径从项目根目录算起，不能跑到项目外面；绝对路径按原样使用，和 `kite build --output` 一样，要把站点构建到项目以外就写绝对路径。每次构建都会把这个目录整个换掉，所以它只能用来放站点。不管用哪种方式指定，下面这些 Kite 都会拒绝：文件；项目本身、所用的主题或插件，或者包含它们的目录；`content`、`static`、`layouts`、`themes`、`plugins`、`.kite`、`.git`，包含它们的目录，以及它们里面的目录。`kite init` 写出的部署工作流上传的是 `public`，改了 `build.output`，工作流里的 `path` 也要跟着改。

@@ -4,12 +4,12 @@ title: 编写主题
 slug: writing-themes
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-09-29T11:08:00Z
+updated_at: 2026-09-30T20:21:00Z
 published_at: 2026-09-26T20:00:00Z
 description: "theme.yaml 声明设置，layouts 放模板，kite theme verify 检查契约。"
 ---
 
-一套主题是一个目录：`theme.yaml` 描述它自己和它的设置，`layouts/` 放模板，`static/` 里的文件随站点发布，`i18n/` 放后台说明文字的翻译。
+一套主题是一个目录：`theme.yaml` 描述它自己和它的设置，`layouts/` 放模板，`static/` 里的文件随站点发布，`i18n/` 放后台说明文字的翻译和页面上的词。
 
 ## 声明设置
 
@@ -57,6 +57,20 @@ theme:
 
 主题目录里放 `screenshot.png`、`.jpg` 或 `.webp` 作为截图，也可以在 `theme.yaml` 里用 `screenshot:` 指定其他文件。
 
+## 页面上的词
+
+同一套语言包里 `theme` 以外的键，是主题页面上的词，模板用 `T` 读：`{{ T "read_more" }}`。词取自站点语言对应的语言包，站点自己的 `i18n/<语言>.yaml` 盖过主题的，所以站点不用替换模板就能改主题的用词；这门语言里没有的词用英文的，都没有就是键本身。词里可以放模板给的值，带数量时按复数规则选形式：
+
+```yaml
+# i18n/en.yaml
+posts:
+  one: "{{ .Count }} post"
+  other: "{{ .Count }} posts"
+of: "{{ .Count }} of {{ .Total }}"
+```
+
+`{{ T "posts" 8 }}` 是 `8 posts`，`{{ T "of" (dict "Count" 8 "Total" 13) }}` 是 `8 of 13`。词是文字，落在哪里就在哪里转义，所以能放进属性里。`i18n.Has "key"` 说明有没有这个词，`{{ i18n.Words "copy" "copied" }}` 把几个词作为一个 JSON 对象交给脚本。内置主题带英文和中文的词；用其他语言写的站点，加一个自己的语言包就能翻译它。
+
 ## 按页面选用的模板
 
 在 `theme.yaml` 里声明，作者就能在编辑器里选：
@@ -79,6 +93,34 @@ layouts:
 
 文章的封面是 front matter 里的 `cover`，模板从 `.Params.cover` 读到的就是作者写的原文；`.Images` 按出现顺序列出正文里的图片，也是原文。列表里的页面同样带着这两样。主题解析它们的方式，和浏览器解析正文里的图片一样：完整地址原样用，从站点根开始写的用 `url.Rel`，其余的相对于页面地址。没写封面时，主题可以改用正文第一张图；写了 `cover: false` 就不显示封面，编辑器里的「不用封面」写的就是它。
 
+## 处理图片
+
+以 bundle 保存的页面，它的文件在 `.Resources` 里，按 bundle 里的名字取：`.Resources.Get "cover.jpg"`、`.Resources.Match "images/*"` 或 `.Resources.ByType "image"`。其中的图片可以做成另一张：更小、裁过或者换格式，主题就这样给列表配小封面，或者给图片写 `srcset`：
+
+```html
+{{ with .Resources.Get "river.jpg" }}
+  {{ $small := img.Fit "800x800" . }}
+  {{ $card := . | img.Fill "600x400" | img.Format "webp" | img.Quality 80 }}
+  <img src="{{ $small.RelPermalink }}" width="{{ $small.Width }}" height="{{ $small.Height }}">
+{{ end }}
+```
+
+`img.Resize "800x"` 缩放到这个尺寸，缺的一边按比例；`img.Fit` 只缩小，放进这个框；`img.Fill "600x400 top"` 先按比例裁、再缩放到正好这个尺寸，锚点指定保留哪一部分；`img.Crop` 只裁不缩；`img.Format` 写成 `webp`、`jpeg`、`png` 或 `gif`；`img.Quality` 是 WebP 或 JPEG 的质量，不写就是 75。照片先按 EXIF 转正，做出的图不带任何 EXIF，也就不会说出拍摄地点。JPEG、PNG、GIF 和 WebP 都能读写，用的是 Kite 自己的代码，在每台机器上做出同样的字节，所以在笔记本上和在 CI 里构建的站点发布的是同样的文件。WebP 是有损压缩，保留透明；写成 JPEG 时透明的部分铺成白色。每张图只做一次：模板第一次问它的地址或尺寸时才做，发布在源文件旁边，名字是 `river_<key>.jpg`，并保存在 `.kite/cache/images/`，之后的构建和 `kite serve` 直接用。
+
+正文里的图片，站点或主题有 `layouts/_markup/render-image.html` 时由它来画，和 Hugo 一样；手机拍的照片就这样缩小后再发布：
+
+```html
+{{- with .Page.Resources.Get .Destination -}}
+  {{- with img.Fit "1600x1600" . -}}
+  <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $.Text }}">
+  {{- end -}}
+{{- else -}}
+  <img src="{{ .Src }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }}>
+{{- end -}}
+```
+
+`.Destination` 是正文里写的图片地址，写的是 bundle 里的文件时，正好是 `.Resources.Get` 要的名字；`.Src` 是没有这个模板时页面引用它的地址，正文从站点根开始写的，前面带上站点的路径。`.Text` 是图片的替代文字，`.Title` 是标题。
+
 ## 模板里的值
 
 front matter 里的值到模板里还是原来的类型，在单页和列表里一样：日期是时间，可以直接交给 `time.Format`；整数是整数，小数是小数。`time.AsTime` 把写成文字的日期读成时间。`math.*` 的参数都是整数时结果也是整数，所以用 `math.Add` 数出来的数能直接和 `8` 比较，`math.Int`、`math.Float` 做转换；`coll.*` 接受任何列表，包括 `.Pages`。
@@ -86,6 +128,23 @@ front matter 里的值到模板里还是原来的类型，在单页和列表里�
 ## 链接
 
 模板链接到 Kite 自己的页面用 `url.For "home"`、`url.For "list" "post"`、`url.For "taxonomy" "tags"` 或 `url.For "term" "tags" "Go"`，链接到站点的其他路径用 `url.Rel "rss.xml"`，两者都会带上站点所在的路径。
+
+## 标签和分类
+
+写法不同但地址相同的词条是同一个词条：Go、go 和 GO 都是 `/tags/go/`，Web Dev 和 web-dev 都是 `/tags/web-dev/`。它的页面列出带着其中任何一种写法的文章，名称取写得最多的那种；各种写法一样多时，按字符顺序取第一个，Go 排在 go 前面。分类页的 `.Terms` 只把它算一次，文章自己的 `.Terms` 按这篇文章的写法显示。只由短横线、斜杠或空格组成的词条没有自己的页面。
+
+## 分页
+
+主题可以按列表的种类规定分页，用在设计需要的地方：首页不是一页页翻的文章列表，或者归档页要列出所有文章。
+
+```yaml
+pagination:
+  home: 0    # 全部显示在一页
+  list: 0
+  term: 20   # 每页 20 条
+```
+
+没写到的种类按站点的 `build.pageSize` 分页，站点的 `build.pagination` 可以替换其中任何一种。`.Paginator` 描述的是页面最终的分页；全部显示在一页的列表是第 1 页、共 1 页，`PageSize` 是条目的数目。
 
 ## 检查主题
 

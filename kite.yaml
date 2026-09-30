@@ -58,6 +58,7 @@ theme:
         pages:
           - {label: 使用主题, url: /using-themes/}
           - {label: 编写主题, url: /writing-themes/}
+          - {label: 短代码, url: /shortcodes/}
           - {label: 使用插件, url: /using-plugins/}
           - {label: 编写插件, url: /writing-plugins/}
       - title: 参考
