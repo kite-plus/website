@@ -3,7 +3,7 @@
 # against the release's checksums, and writes a verified build to public/.
 set -eu
 
-KITE_VERSION=0.1.2
+KITE_VERSION=0.1.3
 
 case "$(uname -m)" in
   x86_64 | amd64) arch=amd64 ;;
