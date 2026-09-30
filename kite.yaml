@@ -68,8 +68,8 @@ theme:
           - {label: 路线图, url: /roadmap/}
           - {label: 参与贡献, url: /contributing/}
     badge_tag: "0.1"
-    badge_text: Kite 0.1.2 发布了
-    badge_link: /posts/kite-0-1-2/
+    badge_text: Kite 0.1.3 发布了
+    badge_link: /posts/kite-0-1-3/
     hero_title: |-
       写博客，
       在*浏览器里*就够了
