@@ -4,7 +4,7 @@ title: 命令行
 slug: cli
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-10-01T12:12:00Z
+updated_at: 2026-10-01T15:28:08Z
 published_at: 2026-09-26T20:00:00Z
 description: "kite 的每个命令，以及最常用的参数。"
 ---
@@ -16,7 +16,7 @@ description: "kite 的每个命令，以及最常用的参数。"
 | 命令 | 作用 |
 | --- | --- |
 | `kite run` | 开始写作：运行站点和后台，连草稿一起显示，并打开浏览器 |
-| `kite init [目录]` | 新建一个项目；`--title`、`--base-url`、`--language` 回答各个问题，`--yes` 全取默认值，`--workflow` 写 GitHub Pages 工作流 |
+| `kite init [目录]` | 新建一个项目；`--title`、`--base-url`、`--language` 回答各个问题，`--yes` 全取默认值，`--workflow` 写 GitHub Pages 工作流；同时写好 `kitew`，固定当前的 Kite 版本 |
 | `kite new <类型> <标题>` | 新建一篇 `post` 或一个 `page`；`--draft` 建成草稿 |
 | `kite list` | 从索引列出内容；`--kind`、`--tag`、`--limit` 过滤 |
 
@@ -34,7 +34,8 @@ description: "kite 的每个命令，以及最常用的参数。"
 
 | 命令 | 作用 |
 | --- | --- |
-| `kite doctor` | 检查项目里的问题，包括 `kite.lock` 记下之后又被改过的主题和插件；`--fix-ids` 给没有 `id` 的内容补上 |
+| `kite doctor` | 检查项目里的问题，包括 `kite.lock` 记下之后又被改过的主题和插件，以及固定的 Kite 版本还差什么；`--fix-ids` 给没有 `id` 的内容补上 |
+| `kite wrapper` | 固定站点构建用的 Kite 版本，默认是正在运行的版本，`--version` 指定一个，并写好 `kitew` 和 `kitew.ps1`，见[固定 Kite 版本](/kitew/) |
 | `kite import hexo <Hexo 站点> [目录]` | 把 Hexo 站点的内容导入一个新站点或已有站点，旧地址都成为别名，见[从 Hugo、Hexo 迁移](/migrate/) |
 | `kite index` | 更新索引；`--rebuild` 丢掉重建 |
 | `kite auth` | `set-password`、`status`、`remove`，管理后台的账号，见[账号与登录](/account/) |

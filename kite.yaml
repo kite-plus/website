@@ -46,6 +46,8 @@ theme:
         pages:
           - {label: 导出静态站点, url: /export/}
           - {label: GitHub Pages, url: /github-pages/}
+          - {label: Cloudflare Pages, url: /cloudflare-pages/}
+          - {label: 固定 Kite 版本, url: /kitew/}
           - {label: Git 发布, url: /git-publish/}
           - {label: 服务器部署, url: /server/}
       - title: 扩展

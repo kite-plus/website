@@ -4,7 +4,7 @@ title: GitHub Pages
 slug: github-pages
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-09-26T20:00:00Z
+updated_at: 2026-10-01T15:28:08Z
 published_at: 2026-09-26T20:00:00Z
 description: "kite init 写好了部署工作流，推送到 main 就上线。"
 ---
@@ -13,7 +13,7 @@ description: "kite init 写好了部署工作流，推送到 main 就上线。"
 
 `kite init` 和后台的建站页面会写好一个 GitHub Pages 工作流。在仓库的 **Settings → Pages → Source** 里选 **GitHub Actions**，之后每次推送到 `main` 就会部署。
 
-工作流用 `kite build --verify` 构建：跑第二次会得到不同产物的站点，会在这里失败，而不是被发布出去。它安装的是写下这个工作流的那个 Kite 版本，所以同一个提交，一年后构建出来和今天一样；想升级就改那一行。
+工作流用 `sh ./kitew build --verify` 构建：跑第二次会得到不同产物的站点，会在这里失败，而不是被发布出去。[`kitew`](/kitew/) 运行 `kite.lock` 固定的 Kite 版本，下载之后先核对校验和，所以同一个提交，一年后构建出来和今天一样；想升级就在后台「系统 → 部署」里改用正在运行的版本，或者运行 `kite wrapper`。0.1.7 之前建的站点，工作流自己安装 Kite，改法见[固定 Kite 版本](/kitew/#017-之前建的站点)。
 
 ## 站点地址
 
