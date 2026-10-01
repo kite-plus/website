@@ -50,6 +50,7 @@ theme:
           - {label: 服务器部署, url: /server/}
       - title: 扩展
         pages:
+          - {label: 应用中心, url: /app-center/}
           - {label: 使用主题, url: /using-themes/}
           - {label: 编写主题, url: /writing-themes/}
           - {label: 短代码, url: /shortcodes/}

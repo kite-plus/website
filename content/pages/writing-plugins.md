@@ -4,7 +4,7 @@ title: 编写插件
 slug: writing-plugins
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-09-26T20:00:00Z
+updated_at: 2026-10-01T12:12:00Z
 published_at: 2026-09-26T20:00:00Z
 description: "插件可以往页面里加代码，也可以在构建时于沙箱中运行 WebAssembly。"
 ---
@@ -98,3 +98,11 @@ GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -o plugin.wasm .
 模块访问不了网络和文件，拿到的时钟不是真实时间，随机数每次运行都一样，所以它的输出只取决于收到的输入。模块有 64 MiB 内存，每个页面限时 10 秒，`build_complete` 限时 2 分钟；出错或超时会让构建失败，并指明是哪个插件。
 
 页面在所有 CPU 核上同时渲染，transform 钩子会在任意一个空闲的模块实例里运行，因此不能在两次调用之间保存状态；`build_complete` 每次构建都在全新的实例里运行。模块在插件开启或站点第一次加载它时编译一次，编译结果缓存在 `.kite/cache/wasm` 下。
+
+## 发布和上架
+
+```bash
+kite plugin pack greet
+```
+
+它把插件打成发布用的 zip，写到插件目录下的 `dist/<id>-<版本>.zip`：只放 `plugin.yaml`、`plugin.wasm`、`assets`、`i18n` 和许可证、说明。在 GitHub 上发一个标签为 `v<版本>` 的版本并附上这个 zip，再向 [kite-plus/apps](https://github.com/kite-plus/apps) 提一个 Pull Request 加上条目，插件就能在[应用中心](/app-center/)里按名字安装了。之后的新版本要比上一版加载更多网站、运行更多钩子或注入更多代码时，要等维护者同意才收录；已经装了它的站点更新时，也要站长再同意一次。

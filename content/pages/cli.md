@@ -4,7 +4,7 @@ title: 命令行
 slug: cli
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-10-01T05:50:00Z
+updated_at: 2026-10-01T12:12:00Z
 published_at: 2026-09-26T20:00:00Z
 description: "kite 的每个命令，以及最常用的参数。"
 ---
@@ -34,7 +34,7 @@ description: "kite 的每个命令，以及最常用的参数。"
 
 | 命令 | 作用 |
 | --- | --- |
-| `kite doctor` | 检查项目里的问题；`--fix-ids` 给没有 `id` 的内容补上 |
+| `kite doctor` | 检查项目里的问题，包括 `kite.lock` 记下之后又被改过的主题和插件；`--fix-ids` 给没有 `id` 的内容补上 |
 | `kite import hexo <Hexo 站点> [目录]` | 把 Hexo 站点的内容导入一个新站点或已有站点，旧地址都成为别名，见[从 Hugo、Hexo 迁移](/migrate/) |
 | `kite index` | 更新索引；`--rebuild` 丢掉重建 |
 | `kite auth` | `set-password`、`status`、`remove`，管理后台的账号，见[账号与登录](/account/) |
@@ -46,13 +46,17 @@ description: "kite 的每个命令，以及最常用的参数。"
 | 命令 | 作用 |
 | --- | --- |
 | `kite theme list` | 列出站点能用的主题，`*` 标出正在用的 |
-| `kite theme add <zip 或目录>` | 安装主题，可以是发布附带的压缩包或一个目录；`--replace` 替换同名的 |
+| `kite theme add <名字、zip 或目录>` | 按名字从索引安装主题（`名字@版本` 指定版本），或者装发布附带的压缩包、一个目录；`--replace` 替换同名的 |
 | `kite theme use <名字>` | 换用一套主题，写的是 `theme.name`，见[使用主题](/using-themes/) |
 | `kite theme remove <名字>` | 删除一套主题，正在用的不能删 |
 | `kite theme new <名字>` | 生成一个起步的主题目录，见[编写主题](/writing-themes/) |
-| `kite theme verify [目录]` | 检查主题构建和预览出来的页面是否一样，见[编写主题](/writing-themes/) |
-| `kite plugin add <zip 或目录>` | 安装插件，装好后是关闭的 |
+| `kite theme verify [目录]` | 检查主题构建和预览出来的页面是否一样，并列出页面会从哪些网站加载东西，见[编写主题](/writing-themes/) |
+| `kite theme pack [目录]` | 打出发布用的 zip，见[编写主题](/writing-themes/#发布和上架) |
+| `kite plugin add <名字、zip 或目录>` | 按名字从索引安装插件，或者装压缩包、一个目录；装好后是关闭的 |
 | `kite plugin enable <id>`、`disable <id>` | 打开、关闭插件 |
 | `kite plugin list` | 列出插件和哪些已打开 |
 | `kite plugin remove <id>` | 删除一个已关闭的插件 |
-| `kite plugin new <id>`、`verify <目录>` | 新建一个插件、检查插件能否被站点加载，见[编写插件](/writing-plugins/) |
+| `kite plugin new <id>`、`verify <目录>`、`pack <目录>` | 新建一个插件、检查插件能否被站点加载、打出发布用的 zip，见[编写插件](/writing-plugins/) |
+| `kite apps search [词...]` | 在索引里找主题和插件，给出的每个词都要对上，见[应用中心](/app-center/) |
+| `kite apps outdated` | 列出有新版本、被撤回或被下架的主题和插件 |
+| `kite apps update [名字...]` | 更新；手动改过的要加 `--force`，插件要做更多事时会先问，或者加 `--yes`；`--refresh` 立即重取索引 |

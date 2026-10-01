@@ -4,7 +4,7 @@ title: 编写主题
 slug: writing-themes
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-10-01T05:50:00Z
+updated_at: 2026-10-01T12:12:00Z
 published_at: 2026-09-26T20:00:00Z
 description: "theme.yaml 声明设置，layouts 放模板，kite theme verify 检查契约。"
 ---
@@ -181,6 +181,14 @@ kite theme verify ./themes/paper
 ```
 
 它用这套主题构建一个用到每种页面的小站点，再向服务器请求构建写出的每个文件，包括 RSS 和 sitemap，逐字节比较。通过检查的主题，发布出去的就是 `kite run` 预览时看到的；没通过的，会指出每个文件第一处不同的行。这个小站点发布在一个路径下，就像 GitHub Pages 的项目站点那样，所以从域名根开始写的链接，比如 `/rss.xml`，也会被报告出来。不给目录时，检查当前项目在用的主题。
+
+## 发布和上架
+
+```bash
+kite theme pack ./themes/paper
+```
+
+它把主题打成发布用的 zip，写到主题目录下的 `dist/<名字>-<版本>.zip`：只放 `theme.yaml`、`layouts`、`static`、`assets`、`i18n`、截图和许可证、说明，放在一个以主题命名的文件夹里；例子站点、构建工具这些不会放进去，同样的文件每次打出来的字节都一样。在 GitHub 上发一个标签为 `v<版本>` 的版本并附上这个 zip，再向 [kite-plus/apps](https://github.com/kite-plus/apps) 提一个 Pull Request 加上条目，主题就能在[应用中心](/app-center/)里按名字安装了。上架要求主题在 `theme.yaml` 里用 SPDX 标识写明开源许可证，比如 `license: MIT`，并在旁边放一份许可证全文。
 
 ## 主题契约
 

@@ -4,7 +4,7 @@ title: 使用插件
 slug: using-plugins
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-09-26T20:00:00Z
+updated_at: 2026-10-01T12:12:00Z
 published_at: 2026-09-26T20:00:00Z
 description: "评论、统计、站内搜索、公式与图表，装上、打开就能用。"
 ---
@@ -13,12 +13,12 @@ description: "评论、统计、站内搜索、公式与图表，装上、打开
 
 ## 在后台安装
 
-后台的「插件」页可以上传 zip 安装插件、开关、修改设置、删除。开启之前会说明插件往页面里加什么、它的代码会从哪些网站加载内容。设置保存在 `kite.yaml` 的 `plugins.settings.<id>` 下，关闭插件时仍然保留。
+官方和社区的插件可以在后台的「系统 → 应用中心」里按名字安装，并保持更新，安装前会先说明它会做什么，见[应用中心](/app-center/)。后台的「插件」页可以上传 zip 安装插件、开关、修改设置、删除。开启之前会说明插件往页面里加什么、它的代码会从哪些网站加载内容。设置保存在 `kite.yaml` 的 `plugins.settings.<id>` 下，关闭插件时仍然保留。
 
 ## 在命令行安装
 
 ```bash
-kite plugin add search-0.1.0.zip   # 也可以是一个目录
+kite plugin add search             # 按名字从索引安装；也可以是压缩包或目录
 kite plugin enable search
 kite plugin list
 kite plugin disable search
@@ -27,7 +27,7 @@ kite plugin remove search
 
 ## 官方插件
 
-官方插件和默认主题以外的主题一样，各自放在独立的仓库里，到仓库的 Releases 下载 zip：
+官方插件和默认主题以外的主题一样，各自放在独立的仓库里。在应用中心里按名字就能装，也可以到仓库的 Releases 下载 zip：
 
 | 插件 | 作用 |
 | --- | --- |
