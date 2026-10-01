@@ -28,12 +28,6 @@ theme:
     tagline: 开源的 Markdown 博客程序
     favicon: /favicon.ico
     share_image: /images/share.jpg
-    nav:
-      - {label: 文档, url: /docs/}
-      - {label: 主题, url: /using-themes/}
-      - {label: 插件, url: /using-plugins/}
-      - {label: 新闻, url: /posts/}
-      - {label: GitHub, url: https://github.com/kite-plus/kite}
     button_label: 下载
     button_url: https://github.com/kite-plus/kite/releases/latest
     sidebar:
@@ -185,3 +179,10 @@ build:
 plugins:
   enabled:
     - search
+menus:
+  main:
+    - {name: 文档, url: /docs/}
+    - {name: 主题, url: /using-themes/}
+    - {name: 插件, url: /using-plugins/}
+    - {name: 新闻, url: /posts/}
+    - {name: GitHub, url: "https://github.com/kite-plus/kite"}
