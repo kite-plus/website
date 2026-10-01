@@ -144,6 +144,11 @@ theme:
         title: 风标
         note: 文档主题 · 本站在用
         link: https://github.com/kite-plus/theme-vane
+      - image: /images/home/theme-almanac-light.webp
+        image_dark: /images/home/theme-almanac-dark.webp
+        title: 年鉴
+        note: 个人站点主题
+        link: https://github.com/kite-plus/theme-almanac
     more_title: Kite Plus
     more_text: 围绕内容创作、发布与发现，构建开源工具。你写下的内容保存在自己掌握的文件里，发布到哪里一直由你决定。
     more:
