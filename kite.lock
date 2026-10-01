@@ -1,0 +1,22 @@
+# Written by Kite: where each theme and plugin installed from an index
+# came from. Their files are in themes/ and plugins/.
+lockfileVersion: 1
+themes:
+  vane:
+    version: 1.0.1
+    source: https://cdn.jsdelivr.net/gh/kite-plus/apps@main/index.json
+    resolved: https://cdn.jsdelivr.net/gh/kite-plus/apps@theme-vane-1.0.1/vane-1.0.1.zip
+    checksum: sha256:da82c093d5e466e0de1bbd8bd075f628aa71a50fa5084bc76437ac4b8cec2947
+    tree: sha256:1b9db074f2b4f28a5a161ef7d8e3cfbb7426754529f7c0a3512c8284450efe04
+plugins:
+  search:
+    version: 0.1.0
+    source: https://cdn.jsdelivr.net/gh/kite-plus/apps@main/index.json
+    resolved: https://cdn.jsdelivr.net/gh/kite-plus/apps@plugin-search-0.1.0/search-0.1.0.zip
+    checksum: sha256:20dee262d440cc4ebe5053d27ab46a3c11f346ebc9c95771b54285ff5fdfc59a
+    tree: sha256:ddfe916a361c81860623fe4cad436ac931329c631623294d630da4724e6a61b2
+    granted:
+      inject: 2
+      loads: []
+      hooks:
+        - build_complete
