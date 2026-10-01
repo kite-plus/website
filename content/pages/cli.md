@@ -4,7 +4,7 @@ title: 命令行
 slug: cli
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-09-29T11:08:00Z
+updated_at: 2026-10-01T05:50:00Z
 published_at: 2026-09-26T20:00:00Z
 description: "kite 的每个命令，以及最常用的参数。"
 ---
@@ -45,6 +45,11 @@ description: "kite 的每个命令，以及最常用的参数。"
 
 | 命令 | 作用 |
 | --- | --- |
+| `kite theme list` | 列出站点能用的主题，`*` 标出正在用的 |
+| `kite theme add <zip 或目录>` | 安装主题，可以是发布附带的压缩包或一个目录；`--replace` 替换同名的 |
+| `kite theme use <名字>` | 换用一套主题，写的是 `theme.name`，见[使用主题](/using-themes/) |
+| `kite theme remove <名字>` | 删除一套主题，正在用的不能删 |
+| `kite theme new <名字>` | 生成一个起步的主题目录，见[编写主题](/writing-themes/) |
 | `kite theme verify [目录]` | 检查主题构建和预览出来的页面是否一样，见[编写主题](/writing-themes/) |
 | `kite plugin add <zip 或目录>` | 安装插件，装好后是关闭的 |
 | `kite plugin enable <id>`、`disable <id>` | 打开、关闭插件 |

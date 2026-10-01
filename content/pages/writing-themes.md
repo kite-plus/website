@@ -4,12 +4,12 @@ title: 编写主题
 slug: writing-themes
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-09-30T20:21:00Z
+updated_at: 2026-10-01T05:50:00Z
 published_at: 2026-09-26T20:00:00Z
 description: "theme.yaml 声明设置，layouts 放模板，kite theme verify 检查契约。"
 ---
 
-一套主题是一个目录：`theme.yaml` 描述它自己和它的设置，`layouts/` 放模板，`static/` 里的文件随站点发布，`i18n/` 放后台说明文字的翻译和页面上的词。
+一套主题是一个目录：`theme.yaml` 描述它自己和它的设置，`layouts/` 放模板，`static/` 里的文件随站点发布，`i18n/` 放后台说明文字的翻译和页面上的词。`kite theme new <名字>` 生成一个起步的主题目录。
 
 ## 声明设置
 
@@ -85,6 +85,34 @@ layouts:
 
 选了它的页面用 `layouts/page/links.html` 渲染，没有的话用 `layouts/links.html`。主题不能声明没有模板文件的布局。
 
+## 菜单
+
+站点的菜单写在 `kite.yaml` 里，不属于哪一个主题，换了主题还在。站内地址从站点根写起，发布时放在站点的路径下：
+
+```yaml
+menus:
+  main:
+    - name: 归档
+      url: /posts/
+    - name: 关于
+      url: /about/
+    - name: 别处            # 只用来归拢下级链接的一项
+      children:
+        - {name: 代码, url: "https://github.com/someone"}
+```
+
+主题在 `theme.yaml` 里声明它画哪些菜单、每个画几层，后台的**设置 → 菜单**据此列出要填的菜单，页面和文章可以按标题搜索添加：
+
+```yaml
+menus:
+  - name: main
+    label: Header
+    description: 每一页顶部的链接。
+    depth: 1                 # 2 表示链接可以展开下级菜单
+```
+
+模板用 `{{ range .Site.Menus.main }}` 画它：每个链接有 `.Name`、已经带上站点路径的 `.URL`、`.Children`，以及 `.Params`，即站点给它的其他东西，比如图标。站点没写的菜单是空的。内置主题在页头画 `main`，站点写这个菜单之前，显示它自己的链接。
+
 ## 代码高亮
 
 页面里的代码按类名而不是颜色高亮，主题的样式表可以为浅色和深色各带一套配色。从 0.1 之后的版本起，代码块写出来是 `<pre class="chroma" data-lang="go">`，`data-lang` 是作者标注的语言，主题可以用它给代码块加上标题。
@@ -154,4 +182,6 @@ kite theme verify ./themes/paper
 
 它用这套主题构建一个用到每种页面的小站点，再向服务器请求构建写出的每个文件，包括 RSS 和 sitemap，逐字节比较。通过检查的主题，发布出去的就是 `kite run` 预览时看到的；没通过的，会指出每个文件第一处不同的行。这个小站点发布在一个路径下，就像 GitHub Pages 的项目站点那样，所以从域名根开始写的链接，比如 `/rss.xml`，也会被报告出来。不给目录时，检查当前项目在用的主题。
 
-主题契约尚未冻结；它会在有了第二套按它写出来的主题之后冻结。
+## 主题契约
+
+主题所依据的契约 `apiVersion: kite/v1` 已经冻结：模板能调用的东西，每个方法和函数连同签名，列在 [theme-system.md](https://github.com/kite-plus/kite/blob/main/docs/design/theme-system.md) 第 6、7 节，以后只增，不改名、不删除、不改签名。用到后来新增的东西的主题，用 `requires` 写明它需要的 Kite 版本。

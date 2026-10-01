@@ -4,7 +4,7 @@ title: 参与贡献
 slug: contributing
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-09-26T20:00:00Z
+updated_at: 2026-10-01T05:50:00Z
 published_at: 2026-09-26T20:00:00Z
 description: "反馈问题、提交改动，以及从源码构建和检查。"
 ---
@@ -23,7 +23,7 @@ description: "反馈问题、提交改动，以及从源码构建和检查。"
 make check
 ```
 
-如果动过后台，`make web-check` 做类型检查，`make web` 构建 CI 会拿来比对的产物。
+如果动过后台，`make web-check` 做类型检查，`make web` 构建 CI 会拿来比对的产物。`make e2e` 跑后台的浏览器测试，每个测试用临时目录里的一次性站点；第一次运行会下载 Chromium。
 
 ## 从源码构建
 
@@ -36,6 +36,7 @@ make web        # 后台界面，会被嵌入二进制
 make web-gen    # 用这次构建自己的描述重新生成 API 客户端
 make docker     # 容器镜像，上面两样东西它会自己编译
 make perf       # 用 2000 篇的站点对照设计里的时延目标计时
+make e2e        # 在 Chromium 里对着新构建的二进制测试后台
 ```
 
 `make web` 需要 Node 和 pnpm，两者版本都被精确钉死，见 `web/.nvmrc` 和 `web/package.json`；其余目标两者都不需要。没有跑过它的二进制照样能用，只是访问后台时会明说后台没有构建。

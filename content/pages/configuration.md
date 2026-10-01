@@ -4,7 +4,7 @@ title: 配置
 slug: configuration
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-09-30T20:21:00Z
+updated_at: 2026-10-01T05:50:00Z
 published_at: 2026-09-26T20:00:00Z
 description: "kite.yaml 的全部设置，以及可以用环境变量覆盖的几个。"
 ---
@@ -54,6 +54,10 @@ plugins:
   enabled: []          # 启用的插件，按运行顺序排列
   settings:            # 各插件在 plugin.yaml 里声明的设置
     search: {full_text: true}
+
+menus:                 # 主题画的链接，按菜单分；见「编写主题」
+  main:
+    - {name: 关于, url: /about/}
 ```
 
 ## 时区
@@ -88,4 +92,4 @@ plugins:
 
 ## 输出目录
 
-`build.output`（或者代替它的 `KITE_BUILD_OUTPUT`）是 `kite build` 写出站点的目录。相对路径从项目根目录算起，不能跑到项目外面；绝对路径按原样使用，和 `kite build --output` 一样，要把站点构建到项目以外就写绝对路径。每次构建都会把这个目录整个换掉，所以它只能用来放站点。不管用哪种方式指定，下面这些 Kite 都会拒绝：文件；项目本身、所用的主题或插件，或者包含它们的目录；`content`、`static`、`layouts`、`themes`、`plugins`、`.kite`、`.git`，包含它们的目录，以及它们里面的目录。`kite init` 写出的部署工作流上传的是 `public`，改了 `build.output`，工作流里的 `path` 也要跟着改。
+`build.output`（或者代替它的 `KITE_BUILD_OUTPUT`）是 `kite build` 写出站点的目录。相对路径从项目根目录算起，不能跑到项目外面；绝对路径按原样使用，和 `kite build --output` 一样，要把站点构建到项目以外就写绝对路径。每次构建都会把这个目录整个换掉，所以它只能用来放站点。不管用哪种方式指定，下面这些 Kite 都会拒绝：文件；项目本身、所用的主题或插件，或者包含它们的目录；`content`、`static`、`layouts`、`themes`、`plugins`、`.kite`、`.git`，包含它们的目录，以及它们里面的目录。已经有文件的目录，只有是这个项目的构建写出的（Kite 记在 `.kite/outputs` 里），或者里面有本站的 `sitemap.xml` 或 `rss.xml`（旧版 Kite 构建出的目录就是这样），才会被换掉；其他的，比如误填的个人文件夹，会被拒绝并原样保留。`kite init` 写出的部署工作流上传的是 `public`，改了 `build.output`，工作流里的 `path` 也要跟着改。
