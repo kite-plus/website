@@ -4,7 +4,7 @@ title: 配置
 slug: configuration
 status: published
 created_at: 2026-09-26T20:00:00Z
-updated_at: 2026-10-01T12:12:00Z
+updated_at: 2026-10-01T13:38:54Z
 published_at: 2026-09-26T20:00:00Z
 description: "kite.yaml 的全部设置，以及可以用环境变量覆盖的几个。"
 ---
@@ -57,6 +57,7 @@ plugins:
 
 apps:
   index: ""            # 代替 Kite 自带索引的另一份索引，见「应用中心」
+  key: ""              # 自己的索引的 minisign 公钥，见「应用中心」
 
 menus:                 # 主题画的链接，按菜单分；见「编写主题」
   main:
@@ -93,6 +94,7 @@ menus:                 # 主题画的链接，按菜单分；见「编写主题�
 | `KITE_BUILD_URLSTYLE` | `build.urlStyle` |
 | `KITE_BUILD_PAGESIZE` | `build.pageSize` |
 | `KITE_APPS_URL` | `apps.index` |
+| `KITE_APPS_KEY` | `apps.key` |
 
 ## 输出目录
 

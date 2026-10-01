@@ -4,7 +4,7 @@ title: 应用中心
 slug: app-center
 status: published
 created_at: 2026-10-01T12:12:00Z
-updated_at: 2026-10-01T12:12:00Z
+updated_at: 2026-10-01T13:38:54Z
 published_at: 2026-10-01T12:12:00Z
 description: "按名字安装和更新主题与插件：装之前说清楚它会做什么，更新时不冲掉你的修改。"
 ---
@@ -47,6 +47,8 @@ kite apps update             # 全部更新，也可以指定一个：kite apps 
 
 索引用 sha256 标明每个压缩包。不管从哪个地址下载，解开之前都先核对，对不上就不装；解开之后，再和上传 zip 一样检查一遍。在后台安装时，索引、压缩包和截图都由 Kite 的服务端去取，浏览器不用访问这些地址，所以只要服务端能联网就行。
 
+从 0.1.6 开始，索引本身用 [minisign](https://jedisct1.github.io/minisign/) 签名，公钥编在 Kite 里。签名取不到或者对不上的索引不用，比已经用过的索引更旧的也不用，免得有人拿撤回某个版本之前的旧副本冒充最新的。每个压缩包的 sha256 都写在签过名的索引里，所以签名也替压缩包作了保证。新取的索引被拒绝时，继续用上一次取到的那份，并说明情况。
+
 ## 离线和自建索引
 
 索引最多一小时取一次，和下载过的压缩包一起缓存在 `.kite/cache/apps` 里；加 `--refresh`，或者在应用中心点「重新获取」，可以立即重取。断网时用缓存的那份，并说明是多久以前取到的。
@@ -56,6 +58,14 @@ kite apps update             # 全部更新，也可以指定一个：kite apps 
 ```yaml
 apps:
   index: https://mirror.example.com/apps/index.json
+```
+
+Kite 从索引的地址加上 `.minisig` 读取签名，所以 Kite 自带索引的副本要把 `index.json.minisig` 和 `index.json` 放在一起，用内置的公钥核对，不用另外配置。自己生成的索引要用自己的钥匙签名，比如 `minisign -Sm index.json`，再把公钥写进 `apps.key`，或者环境变量 `KITE_APPS_KEY`：
+
+```yaml
+apps:
+  index: https://apps.example.com/index.json
+  key: RW...           # .pub 文件里以 RW 开头的那一行
 ```
 
 ## 上架自己的主题或插件
