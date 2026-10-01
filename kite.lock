@@ -7,11 +7,11 @@ kite:
   checksums: sha256:5630a7d0d2d14aa599735c273f504dbaa618a0efbc3d517c6dbd1307818f4459
 themes:
   vane:
-    version: 1.0.1
+    version: 1.0.2
     source: https://cdn.jsdelivr.net/gh/kite-plus/apps@main/index.json
-    resolved: https://cdn.jsdelivr.net/gh/kite-plus/apps@theme-vane-1.0.1/vane-1.0.1.zip
-    checksum: sha256:da82c093d5e466e0de1bbd8bd075f628aa71a50fa5084bc76437ac4b8cec2947
-    tree: sha256:1b9db074f2b4f28a5a161ef7d8e3cfbb7426754529f7c0a3512c8284450efe04
+    resolved: https://cdn.jsdelivr.net/gh/kite-plus/apps@theme-vane-1.0.2/vane-1.0.2.zip
+    checksum: sha256:e7ac176cb036d1ffd135304d31a18722fafd53e10c3d5bbb520d7807b89d3639
+    tree: sha256:7ff133c7b381f021de1ef6cc09c7d222ce1ceba2a3f82516694191485e58ef74
 plugins:
   search:
     version: 0.1.0

@@ -87,7 +87,7 @@
 
 - **构建**：`vercel.json` 让 Vercel 运行 `scripts/vercel-build.sh`，发布 `public/`。脚本运行 `sh ./kitew build --verify`：`kitew` 按 `kite.lock` 固定的 Kite 版本（现在是 0.1.7）下载，先用锁里记下的 sha256 核对发布的 `checksums.txt`，再核对发布包，然后运行。升级 Kite 就运行 `kite wrapper --version <新版本>`，把 `kite.lock` 一起提交。
 - **预览**：PR 和分支的预览部署用它们自己的地址构建（`KITE_SITE_BASEURL` 取 `VERCEL_URL`），订阅源和站点地图指向预览本身。
-- **主题和插件**：风标和搜索插件都是发布出来的 zip 装进仓库的（`themes/vane/` 现在是风标 1.0.1，`plugins/search/` 现在是 0.1.0），构建时不上网取。升级就把新版本的 zip 解压出来，整个替换对应的目录。
+- **主题和插件**：风标和搜索插件都是发布出来的 zip 装进仓库的（`themes/vane/` 现在是风标 1.0.2，`plugins/search/` 现在是 0.1.0），构建时不上网取。升级就把新版本的 zip 解压出来，整个替换对应的目录。
 - **定时文章**：Vercel 不会按时重新构建。官网很少用定时文章，到点后手动重新部署；以后需要时，可以用 GitHub Actions 定时调用 Vercel 的 Deploy Hook。
 - **域名**：`www.kite.plus` 绑在 Vercel 项目上，`kite.plus` 跳转到它，DNS 记录建在 Cloudflare 上。原来的 GitHub Pages 在 2026-09-27 关掉了：部署工作流已删，仓库设置里的 Pages 和 `github-pages` 环境也删了，`kite-plus.github.io/website/` 不再有内容。
 

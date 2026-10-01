@@ -1,6 +1,6 @@
 name: vane
 title: Vane
-version: 1.0.1
+version: 1.0.2
 apiVersion: kite/v1
 requires: ">=0.1.4 <2.0.0"
 description: A documentation theme for product docs, project sites and knowledge bases, drawn on paper in ink. A home page with a kite in its sky, docs in an ordered tree with a table of contents, and news, by day and by night, with nothing loaded from third parties.
@@ -406,7 +406,7 @@ settings:
       - key: gallery
         type: repeat
         label: Pictures
-        help: Prints laid on a band of darker paper, two to a row, each with a caption and a link if it has one.
+        help: Prints laid on a band of darker paper, two to a row, or three when there are three, six or nine, each with a caption and a link if it has one.
         fields:
           - {key: image, type: image, label: Picture}
           - {key: image_dark, type: image, label: Picture on a dark page}
