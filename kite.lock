@@ -13,6 +13,20 @@ themes:
     checksum: sha256:e7ac176cb036d1ffd135304d31a18722fafd53e10c3d5bbb520d7807b89d3639
     tree: sha256:7ff133c7b381f021de1ef6cc09c7d222ce1ceba2a3f82516694191485e58ef74
 plugins:
+  analytics:
+    version: 0.1.0
+    source: https://cdn.jsdelivr.net/gh/kite-plus/apps@main/index.json
+    resolved: https://cdn.jsdelivr.net/gh/kite-plus/apps@plugin-analytics-0.1.0/analytics-0.1.0.zip
+    checksum: sha256:077e540c3da8cd0e2c73656a77a12b19a2cf38f0ef742cab8315cc9a4107a17c
+    tree: sha256:64f462e537e3d856a070a83809ef8b9c2be3dc24e7bf403319e803310e48d6d6
+    granted:
+      inject: 4
+      loads:
+        - cloud.umami.is
+        - hm.baidu.com
+        - plausible.io
+        - www.googletagmanager.com
+      hooks: []
   search:
     version: 0.1.0
     source: https://cdn.jsdelivr.net/gh/kite-plus/apps@main/index.json
