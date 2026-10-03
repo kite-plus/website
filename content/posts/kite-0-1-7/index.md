@@ -7,6 +7,7 @@ created_at: 2026-10-01T15:44:45Z
 updated_at: 2026-10-01T15:44:45Z
 published_at: 2026-10-01T15:44:45Z
 description: "站点固定自己构建用的 Kite 版本：kite.lock 记下版本，kitew 下载、核对并运行它，你的电脑和部署用同一个 Kite。"
+categories: [发布]
 tags: [发布]
 ---
 

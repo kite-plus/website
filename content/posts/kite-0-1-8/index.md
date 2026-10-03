@@ -7,6 +7,7 @@ created_at: 2026-10-01T20:18:26Z
 updated_at: 2026-10-01T20:18:26Z
 published_at: 2026-10-01T20:18:26Z
 description: "应用中心的一个小版本：每个插件显示自己的图标，「重新获取」会告诉你这次取到了什么。"
+categories: [发布]
 tags: [发布]
 ---
 

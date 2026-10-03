@@ -7,6 +7,7 @@ created_at: 2026-09-26T20:30:00Z
 updated_at: 2026-10-01T07:25:00Z
 published_at: 2026-09-26T20:30:00Z
 description: "给产品文档、项目官网和知识库用的第二套官方主题，也是本站的主题。"
+categories: [主题]
 tags: [主题]
 ---
 

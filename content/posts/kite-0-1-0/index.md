@@ -7,6 +7,7 @@ created_at: 2026-09-26T18:30:00Z
 updated_at: 2026-09-26T18:30:00Z
 published_at: 2026-09-26T18:30:00Z
 description: "第一个版本：浏览器里的写作后台，导出和部署，主题和插件。"
+categories: [发布]
 tags: [发布]
 ---
 

@@ -7,6 +7,7 @@ created_at: 2026-10-01T13:38:54Z
 updated_at: 2026-10-01T13:38:54Z
 published_at: 2026-10-01T13:38:54Z
 description: "应用中心的索引有了签名：Kite 只用自带的钥匙签过名的索引，CDN 和镜像都改不了站点装进来的东西。"
+categories: [发布]
 tags: [发布]
 ---
 

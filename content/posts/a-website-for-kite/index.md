@@ -7,6 +7,7 @@ created_at: 2026-09-23T07:38:17Z
 updated_at: 2026-09-26T21:00:00Z
 published_at: 2026-09-26T21:00:00Z
 description: "官网本身就是一个 Kite 站点，托管在 Vercel 上。"
+categories: [公告]
 tags: [公告]
 ---
 

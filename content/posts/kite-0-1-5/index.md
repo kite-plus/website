@@ -7,6 +7,7 @@ created_at: 2026-10-01T12:12:00Z
 updated_at: 2026-10-01T12:12:00Z
 published_at: 2026-10-01T12:12:00Z
 description: "带来应用中心的一版：主题和插件按名字安装、保持更新，在后台和命令行里都行；kite.lock 记下它们从哪来。"
+categories: [发布]
 tags: [发布]
 ---
 

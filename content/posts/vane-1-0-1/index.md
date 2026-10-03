@@ -7,6 +7,7 @@ created_at: 2026-10-01T07:15:00Z
 updated_at: 2026-10-01T07:15:00Z
 published_at: 2026-10-01T07:15:00Z
 description: "风标到了 1.0：按冻结的主题契约 kite/v1 写成，页头画站点自己的菜单；1.0.1 修好了只写菜单的站点页头没有链接的问题。"
+categories: [主题]
 tags: [主题]
 ---
 

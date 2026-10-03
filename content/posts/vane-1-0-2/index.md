@@ -7,6 +7,7 @@ created_at: 2026-10-01T20:00:00Z
 updated_at: 2026-10-01T20:00:00Z
 published_at: 2026-10-01T20:00:00Z
 description: "首页的图片三张一排：图片是三张、六张或九张时，宽屏上每行放三张，不再剩一张单独占一行。"
+categories: [主题]
 tags: [主题]
 ---
 

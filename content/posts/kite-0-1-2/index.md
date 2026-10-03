@@ -7,6 +7,7 @@ created_at: 2026-09-29T10:30:00Z
 updated_at: 2026-09-29T10:30:00Z
 published_at: 2026-09-29T10:30:00Z
 description: "搬家的一版：Hugo 站点原地打开，Hexo 站点一条命令导入，旧地址和旧订阅都继续有效；草稿边写边自动保存。"
+categories: [发布]
 tags: [发布]
 ---
 
