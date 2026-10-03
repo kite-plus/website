@@ -26,20 +26,19 @@ the page here too.
 
 The site is `website`, a Cloudflare Worker that serves only static files,
 built by Workers Builds from this repository. Every push to `main` runs
-`bash scripts/vercel-build.sh`, which builds the site with the Kite release
+`bash scripts/build.sh`, which builds the site with the Kite release
 `kite.lock` pins: `kitew` downloads it, checks it against the checksums the
 lock records, and writes `kite build --verify` to `public/`. Then
 `npx wrangler deploy` uploads `public/`. The repository has no Wrangler
 configuration; Wrangler writes one for each deploy, naming the Worker
-`website` and its assets directory `public`. The script keeps its old name
-because the Worker's build command names it.
+`website` and its assets directory `public`.
 
 To set it up once:
 
 1. In the Cloudflare dashboard, under **Workers & Pages**, create a Worker
    from this repository and call it `website`.
 2. Under its **Settings → Build**, for production: build command
-   `bash scripts/vercel-build.sh`, deploy command `npx wrangler deploy`, root
+   `bash scripts/build.sh`, deploy command `npx wrangler deploy`, root
    directory `/`, branch `main`. It needs no build variables, since
    `kite.yaml` names `https://www.kite.plus`.
 3. Under its **Domains**, add `www.kite.plus` and `kite.plus` as custom
