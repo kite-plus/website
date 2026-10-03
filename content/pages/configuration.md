@@ -27,6 +27,7 @@ site:
 content:
   store: file          # 内容存在哪里
   dir: content
+  defaultCategory: 未分类 # 后台新建文章时预填的分类，"" 是不预填
 
 theme:
   name: default
