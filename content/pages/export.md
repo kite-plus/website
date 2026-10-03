@@ -38,7 +38,7 @@ docker cp kite:/data/public ./public
 
 ## 交给托管平台构建
 
-Vercel、Netlify、Cloudflare Pages 这类平台可以在每次推送后替你构建：构建命令下载一个固定版本的 Kite，运行 `kite build --verify`，发布目录填 `public`。本站就是这样部署在 Vercel 上的，构建脚本见 [kite-plus/website](https://github.com/kite-plus/website)。
+Vercel、Netlify、Cloudflare Pages 这类平台可以在每次推送后替你构建：构建命令下载一个固定版本的 Kite，运行 `kite build --verify`，发布目录填 `public`。本站就是这样用 Cloudflare Workers 部署的，构建脚本见 [kite-plus/website](https://github.com/kite-plus/website)。
 
 站点地址和托管平台给的预览地址不同时，用环境变量 `KITE_SITE_BASEURL` 在构建时换掉 `kite.yaml` 里的地址，订阅源和站点地图里写的就是那个地址。
 
