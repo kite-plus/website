@@ -4,7 +4,7 @@ title: 固定 Kite 版本
 slug: kitew
 status: published
 created_at: 2026-10-01T15:28:08Z
-updated_at: 2026-10-01T15:28:08Z
+updated_at: 2026-10-15T18:10:00Z
 published_at: 2026-10-01T15:28:08Z
 description: "kite.lock 固定站点构建用的 Kite 版本，kitew 下载、核对并运行它：这台电脑和部署用同一个 Kite。"
 ---
@@ -35,10 +35,16 @@ powershell -ExecutionPolicy Bypass -File kitew.ps1 build
 
 升级 Kite 之后，`kite build`、`kite serve` 和 `kite doctor` 会提示正在运行的版本和固定的不一样。两种改法：
 
-- 在后台「系统 → 部署」的「Kite 版本」里点「改用当前版本构建」，再发布 `kite.lock`；
+- 在后台「系统 → 部署」的「上线前检查」里展开 Kite 版本那一行，点「改用 0.1.12 构建」这样的按钮（上面写的是正在运行的版本），再发布 `kite.lock`；
 - 在站点文件夹里运行 `kite wrapper`，固定正在运行的版本；或者用 `kite wrapper --version 0.1.7` 指定一个版本。
 
 固定的版本只在你确认后才会变，`kite.lock` 发布之后，部署才用新版本构建。
+
+## 新版本提醒
+
+从 0.1.12 起，发布版的 Kite 运行 `kite serve` 或 `kite run` 时，每天最多问一次 GitHub 有没有更新的版本，答案存在用户缓存目录的 `kite/latest.json` 里。有新版本时，服务启动时和日志里会提示，后台在每个浏览器里提示一次，并在「系统 → 部署」的「上线前检查」里一直显示，直到服务换成新版本。
+
+它只负责提醒：替换程序（在容器里是拉取新镜像）和修改固定的版本都由你来做。从源码构建的 Kite 不会检查，设置环境变量 `KITE_NO_UPDATE_CHECK=1` 可以关闭检查。
 
 ## 0.1.7 之前建的站点
 
